@@ -5,11 +5,116 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="./pages/index.css">
+
   <title>Место</title>
 </head>
 
 <body>
+  <header class="header">
+    <a href="#" class="logo">
+      <img src="./images/logo.png" alt="Логотип 'Mesto Russia'" srcset="">
+    </a>
+  </header>
 
+  <main class="main">
+    <section class="profile">
+      <img src="./images/profile/JacquesCousteau.jpg" alt="Фото автора">
+      <div class="profile__text-container">
+        <h2 class="profile__name">Жак-Ив Кусто</h2>
+        <p class="profile__descr">Исследователь океана</p>
+        <button class="edit-button">
+          <svg>
+            <use xlink:href="./images/sprite.svg#edit"></use>
+          </svg>
+        </button>
+      </div>
+      <button class="add-button">
+        <svg>
+          <use xlink:href="./images/sprite.svg#add"></use>
+        </svg>
+      </button>
+    </section>
+
+    <section class="place">
+      <ul class="place__list">
+        <li class="place__item">
+          <figure class="place__figure">
+            <img src="./images/place/place-baikal.jpg" alt="Кристально чистый лед байкала" class="place__img">
+            <figcaption class="place__figcaption">Байкал</figcaption>
+          </figure>
+          <button class="like place__btn-like">
+            <svg>
+              <use xlink:href="./images/sprite.svg#like"></use>
+            </svg>
+          </button>
+        </li>
+        <li class="place__item">
+          <figure class="place__figure">
+            <img src="./images/place/place-bermamut.jpg" alt="Скалистый хребет на закате" class="place__img">
+            <figcaption class="place__figcaption">Плато Бермамыт</figcaption>
+          </figure>
+          <button class="like place__btn-like">
+            <svg>
+              <use xlink:href="./images/sprite.svg#like"></use>
+            </svg>
+          </button>
+        </li>
+        <li class="place__item">
+          <figure class="place__figure">
+            <img src="./images/place/place-elbrus.jpg" alt="Эльбрус летом" class="place__img">
+            <figcaption class="place__figcaption">Эльбрус</figcaption>
+          </figure>
+          <button class="like place__btn-like">
+            <svg>
+              <use xlink:href="./images/sprite.svg#like"></use>
+            </svg>
+          </button>
+        </li>
+        <li class="place__item">
+          <figure class="place__figure">
+            <img src="./images/place/place-guamskoe-gorge.jpg" alt="Гуамское ущелье с кристально чистой водой"
+              class="place__img">
+            <figcaption class="place__figcaption">Гуамское ущелье</figcaption>
+          </figure>
+          <button class="like place__btn-like">
+            <svg>
+              <use xlink:href="./images/sprite.svg#like"></use>
+            </svg>
+          </button>
+        </li>
+        <li class="place__item">
+          <figure class="place__figure">
+            <img src="./images/place/place-kamchatka.jpg" alt="Вулканы Камчатки" class="place__img">
+            <figcaption class="place__figcaption">Камчатка</figcaption>
+          </figure>
+          <button class="like place__btn-like">
+            <svg>
+              <use xlink:href="./images/sprite.svg#like"></use>
+            </svg>
+          </button>
+        </li>
+        <li class="place__item">
+          <figure class="place__figure">
+            <img src="./images/place/place-perm.jpg" alt="Устье реки в тумане" class="place__img">
+            <figcaption class="place__figcaption">Пермский край</figcaption>
+          </figure>
+          <button class="like place__btn-like">
+            <svg>
+              <use xlink:href="./images/sprite.svg#like"></use>
+            </svg>
+          </button>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__ps">
+      &#169; 2020 Mesto Russia
+    </p>
+  </footer>
 </body>
 
 </html>
