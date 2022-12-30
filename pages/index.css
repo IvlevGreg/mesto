@@ -2,3 +2,11 @@
 @import url("../vendor/normalize.css");
 
 /* variables */
+
+@import url(".././variables/color-background.css");
+@import url(".././variables/color-text.css");
+
+/* fonts */
+@import url("../fonts/fonts.css");
+
+/* blocks */
