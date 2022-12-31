@@ -5,6 +5,7 @@
 
 @import url(".././variables/color-background.css");
 @import url(".././variables/color-text.css");
+@import url(".././variables/color-border.css");
 
 /* fonts */
 @import url("../fonts/fonts.css");
