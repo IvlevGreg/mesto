@@ -139,7 +139,7 @@
 }
 
 .place__item {
-  padding-bottom: 31px;
+  padding-bottom: 22px;
 
   color: var(--text-color-secondary);
 
@@ -159,10 +159,7 @@
 }
 
 .place__content {
-  position: relative;
-
-  padding-left: 20px;
-  padding-right: 55px;
+  padding: 0 20px;
 
   display: flex;
   align-items: center;
@@ -170,12 +167,15 @@
 }
 
 .place__name {
+  max-width: 200px;
+
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
-  /* text-overflow: ellipsis;
+
+  text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden; */
+  overflow: hidden;
 }
 
 .btn-like {
@@ -195,9 +195,9 @@
   width: 22px;
   height: 19px;
 
-  position: absolute;
+  /* position: absolute;
   top: 0;
-  right: 0;
+  right: 0; */
 }
 
 .footer {
