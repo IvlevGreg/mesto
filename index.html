@@ -129,6 +129,31 @@
     </section>
   </main>
 
+  <div class="popup ">
+    <div class="popup__scroll">
+      <button class="close-btn popup__close-btn">
+        <svg class="close-btn__svg">
+          <use xlink:href="./images/sprite.svg#close"></use>
+        </svg>
+      </button>
+      <div class="popup__container">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form action="" class="edit-form popup__edit-form">
+          <fieldset class="edit-form__fieldset">
+            <label class="edit-form__label">
+              <input type="text" class="edit-form__input edit-form__input_name">
+            </label>
+
+            <label class="edit-form__label">
+              <input type="text" class="edit-form__input edit-form__input_descr">
+            </label>
+          </fieldset>
+          <button type="submit" class="edit-form__save-button">Сохранить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <footer class="footer">
     <p class="footer__ps">
       &#169; 2020 Mesto Russia
