@@ -347,6 +347,50 @@
   height: 100%;
 }
 
+@media screen and (min-width: 520px) {
+  .place__item {
+    width: calc(50% - 8.5px);
+  }
+
+  .profile {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+
+  .profile__img {
+    margin-bottom: 0;
+  }
+
+  .profile__text-container {
+    margin-bottom: 0;
+    flex-shrink: 2;
+  }
+
+  .profile__name {
+    max-width: none;
+    text-align: left;
+  }
+
+  .profile__descr {
+    text-align: left;
+  }
+
+  .profile__add-button {
+    align-self: center;
+    min-width: 150px;
+    width: auto;
+  }
+
+  .add-button__svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .profile__text-container {
+    padding-right: 18px;
+  }
+}
 
 @media screen and (min-width: 700px) {
   .header {
