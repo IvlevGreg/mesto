@@ -23,6 +23,19 @@
   background-color: var(--bac-main-color);
 }
 
+.main-title {
+  position: absolute;
+  top: 0;
+  left: -100%;
+
+  margin: 0;
+  width: 0;
+  height: 0;
+
+  visibility: hidden;
+  opacity: 0;
+}
+
 .pages_popup-opened {
   overflow-y: hidden;
 }
@@ -66,12 +79,16 @@
   max-width: 80%;
 }
 
-.profile__name {
+.profile__title {
   position: relative;
 
   margin: 0;
   padding: 0;
   margin-bottom: 7px;
+}
+
+.profile__name {
+  /* margin-right: 10px; */
 
   font-weight: 500;
   font-size: 27px;
@@ -92,15 +109,17 @@
   position: absolute;
 
   right: -28px;
-  top: 0;
+  top: 5px;
 }
 
 .edit-button {
   width: 18px;
   height: 18px;
   padding: 0;
+
   border: none;
   background: none;
+  cursor: pointer;
 }
 
 .edit-button__svg {
@@ -122,6 +141,8 @@
   padding: 0;
   border: 2px solid var(--text-color-main);
   background: none;
+
+  cursor: pointer;
 }
 
 .add-button__svg {
@@ -189,6 +210,8 @@
 
   border: none;
   background: none;
+
+  cursor: pointer;
 }
 
 .btn-like__svg {
@@ -248,6 +271,7 @@
 }
 
 .popup__scroll {
+  padding: 40px 20px;
   width: 88%;
   max-width: 430px;
   overflow-y: auto;
@@ -261,6 +285,7 @@
   max-width: 430px;
   padding: 25px 22px;
   box-sizing: border-box;
+  z-index: 1;
 
   color: var(--text-color-secondary);
 
@@ -278,6 +303,33 @@
 
 .popup__edit-form {
   width: 100%;
+}
+
+.popup__close-btn {
+  position: absolute;
+  right: 0;
+  top: -36px;
+
+  margin-bottom: 16px;
+  align-self: flex-end;
+}
+
+.close-btn {
+  padding: 0;
+  border: none;
+  background: none;
+
+  width: 20px;
+  height: 20px;
+
+  cursor: pointer;
+}
+
+.close-btn__svg {
+  width: 100%;
+  height: 100%;
+
+  fill: white;
 }
 
 .edit-form {
@@ -327,25 +379,22 @@
 
   border: none;
   background-color: var(--bac-main-color);
+  cursor: pointer;
 }
 
-.close-btn {
-  padding: 0;
-  border: none;
-  background: none;
+@media screen and (max-height: 420px) {
+  .popup__close-btn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+  }
 
-  width: 20px;
-  height: 20px;
-}
-
-.popup__close-btn {
-  margin-bottom: 16px;
-  align-self: flex-end;
-}
-
-.close-btn__svg {
-  width: 100%;
-  height: 100%;
+  .popup__close-btn svg {
+    fill: black;
+  }
+  .popup__scroll {
+    padding: 0;
+  }
 }
 
 @media screen and (min-width: 520px) {
@@ -370,7 +419,13 @@
 
   .profile__name {
     max-width: none;
+    margin-right: 18px;
+
     text-align: left;
+  }
+
+  .profile__title {
+    display: inline-block;
   }
 
   .profile__descr {
@@ -431,10 +486,13 @@
   }
 
   .profile__edit-button {
-    right: -43px;
+    right: -25px;
+    top: 14px;
   }
 
   .popup__close-btn {
+    right: -40px;
+    top: -40px;
   }
 
   .close-btn {
@@ -442,9 +500,24 @@
     height: 32px;
   }
 
+  .popup__title {
+    font-size: 24px;
+    line-height: 29px;
+  }
+
+  .popup__container {
+    padding: 36px;
+  }
+
   .popup__scroll {
-    max-width: 470px;
-    transform: translateX(40px);
+    padding: 40px;
+    /* max-width: 430px; */
+    /* transform: translateX(40px); */
+  }
+
+  .edit-form__save-button {
+    font-size: 18px;
+    line-height: 22px;
   }
 
   .popup__title {
