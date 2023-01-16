@@ -1,0 +1,22 @@
+.add-button {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  border: 2px solid var(--text-color-main);
+  background: none;
+
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  opacity: 0.6;
+}
+
+.add-button:active {
+  opacity: 0.4;
+}

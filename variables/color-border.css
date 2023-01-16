@@ -1,0 +1,5 @@
+:root {
+  --bor-section-color: #545454;
+  --bor-input-color: rgba(0, 0, 0, 0.2);
+  --bor-input-color-focus: rgba(0, 0, 0, 1);
+}
