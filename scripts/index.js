@@ -6,6 +6,7 @@ const editForm = popup.querySelector('.edit-form');
 function openPopup() {
   popup.classList.add('popup_opened');
   document.body.classList.add('pages_popup-opened');
+  popup.querySelector('input').focus();
 }
 
 function closePopup() {
