@@ -33,9 +33,8 @@
     <section class="profile">
       <img class="profile__img" src="./images/profile/JacquesCousteau.jpg" alt="Фото автора">
       <div class="profile__text-container">
-        <h2 class="profile__name">
-          Жак-Ив Кусто
-
+        <h2 class="profile__title">
+          <span class="profile__name">Жак-Ив Кусто</span>
           <button class="profile__edit-button edit-button">
             <svg class="edit-button__svg">
               <use xlink:href="./images/sprite.svg#edit"></use>
@@ -58,8 +57,8 @@
           <img src="./images/place/place-baikal.jpg" alt="Кристально чистый лед байкала" class="place__img">
           <div class="place__content">
             <div class="place__name">Байкал</div>
-            <button class="btn-like place__btn-like">
-              <svg class="btn-like__svg">
+            <button class="like-button place__like-button">
+              <svg class="like-button__svg">
                 <use xlink:href="./images/sprite.svg#like"></use>
               </svg>
             </button>
@@ -70,8 +69,8 @@
           <img src="./images/place/place-bermamut.jpg" alt="Скалистый хребет на закате" class="place__img">
           <div class="place__content">
             <div class="place__name">Плато Бермамыт</div>
-            <button class="btn-like place__btn-like">
-              <svg class="btn-like__svg">
+            <button class="like-button place__like-button">
+              <svg class="like-button__svg">
                 <use xlink:href="./images/sprite.svg#like"></use>
               </svg>
             </button>
@@ -82,8 +81,8 @@
           <img src="./images/place/place-elbrus.jpg" alt="Эльбрус летом" class="place__img">
           <div class="place__content">
             <div class="place__name">Эльбрус</div>
-            <button class="btn-like place__btn-like">
-              <svg class="btn-like__svg">
+            <button class="like-button place__like-button">
+              <svg class="like-button__svg">
                 <use xlink:href="./images/sprite.svg#like"></use>
               </svg>
             </button>
@@ -95,8 +94,8 @@
             class="place__img">
           <div class="place__content">
             <div class="place__name">Гуамское ущелье</div>
-            <button class="btn-like place__btn-like">
-              <svg class="btn-like__svg">
+            <button class="like-button place__like-button">
+              <svg class="like-button__svg">
                 <use xlink:href="./images/sprite.svg#like"></use>
               </svg>
             </button>
@@ -107,8 +106,8 @@
           <img src="./images/place/place-kamchatka.jpg" alt="Вулканы Камчатки" class="place__img">
           <div class="place__content">
             <div class="place__name">Камчатка</div>
-            <button class="btn-like place__btn-like">
-              <svg class="btn-like__svg">
+            <button class="like-button place__like-button">
+              <svg class="like-button__svg">
                 <use xlink:href="./images/sprite.svg#like"></use>
               </svg>
             </button>
@@ -119,8 +118,8 @@
           <img src="./images/place/place-perm.jpg" alt="Устье реки в тумане" class="place__img">
           <div class="place__content">
             <div class="place__name">Пермский край</div>
-            <button class="btn-like place__btn-like">
-              <svg class="btn-like__svg">
+            <button class="like-button place__like-button">
+              <svg class="like-button__svg">
                 <use xlink:href="./images/sprite.svg#like"></use>
               </svg>
             </button>
@@ -132,12 +131,13 @@
 
   <div class="popup ">
     <div class="popup__scroll">
-      <button class="close-btn popup__close-btn">
-        <svg class="close-btn__svg">
-          <use xlink:href="./images/sprite.svg#close"></use>
-        </svg>
-      </button>
       <div class="popup__container">
+        <button class="close-button popup__close-button">
+          <svg class="close-button__svg">
+            <use xlink:href="./images/sprite.svg#close"></use>
+          </svg>
+        </button>
+
         <h2 class="popup__title">Редактировать профиль</h2>
         <form action="" class="edit-form popup__edit-form">
           <fieldset class="edit-form__fieldset">
@@ -157,7 +157,7 @@
 
   <footer class="footer">
     <p class="footer__ps">
-      &#169; 2020 Mesto Russia
+      &#169; 2023 Mesto Russia
     </p>
   </footer>
 
