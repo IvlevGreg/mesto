@@ -12,534 +12,59 @@
 
 /* blocks */
 
-.pages {
-  min-width: 320px;
-  max-width: 960px;
-  margin: 0 auto;
-
-  color: var(--text-color-main);
-  font-family: "Inter", Arial, Helvetica, sans-serif;
-
-  background-color: var(--bac-main-color);
-}
-
-.main-title {
-  position: absolute;
-  top: 0;
-  left: -100%;
-
-  margin: 0;
-  width: 0;
-  height: 0;
-
-  visibility: hidden;
-  opacity: 0;
-}
-
-.pages_popup-opened {
-  overflow-y: hidden;
-}
-
-.header {
-  padding: 28px 30px;
-  border-bottom: 1px solid var(--bor-section-color);
-}
-
-.logo {
-}
-
-.logo__svg {
-  width: 103px;
-  height: 24px;
-}
-
-.main {
-}
-
-.profile {
-  padding: 40px 19px 19px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.profile__img {
-  height: 120px;
-  width: 120px;
-  margin-bottom: 28px;
-
-  border-radius: 50%;
-}
-
-.profile__text-container {
-  position: relative;
-
-  margin-bottom: 32px;
-  max-width: 80%;
-}
-
-.profile__title {
-  position: relative;
-
-  margin: 0;
-  padding: 0;
-  margin-bottom: 7px;
-}
-
-.profile__name {
-  /* margin-right: 10px; */
-
-  font-weight: 500;
-  font-size: 27px;
-  line-height: 33px;
-  text-align: center;
-}
-
-.profile__descr {
-  margin: 0;
-  padding: 0;
-
-  font-size: 14px;
-  line-height: 17px;
-  text-align: center;
-}
-
-.profile__edit-button {
-  position: absolute;
-
-  right: -28px;
-  top: 5px;
-}
-
-.edit-button {
-  width: 18px;
-  height: 18px;
-  padding: 0;
-
-  border: none;
-  background: none;
-  cursor: pointer;
-}
-
-.edit-button__svg {
-  width: 100%;
-  height: 100%;
-}
-
-.profile__add-button {
-  align-self: stretch;
-}
-
-.add-button {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 0;
-  border: 2px solid var(--text-color-main);
-  background: none;
-
-  cursor: pointer;
-}
-
-.add-button__svg {
-  width: 16px;
-  height: 16px;
-}
-
-.place {
-  padding: 18px 19px 24px;
-}
-
-.place__list {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px 17px;
-
-  list-style: none;
-}
-
-.place__item {
-  padding-bottom: 22px;
-  width: 100%;
-
-  color: var(--text-color-secondary);
-
-  background-color: var(--bac-secondary-color);
-  border-radius: 10px;
-}
-
-.place__img {
-  width: 100%;
-  margin-bottom: 25px;
-  aspect-ratio: 1/1;
-
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-
-  object-fit: cover;
-}
-
-.place__content {
-  padding: 0 20px;
-  gap: 10px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.place__name {
-  font-weight: 900;
-  font-size: 24px;
-  line-height: 29px;
-
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.btn-like {
-  padding: 0;
-  margin: 0;
-
-  border: none;
-  background: none;
-
-  cursor: pointer;
-}
-
-.btn-like__svg {
-  width: 100%;
-  height: 100%;
-}
-
-.place__btn-like {
-  width: 22px;
-  height: 19px;
-  flex: none;
-}
-
-.footer {
-  padding: 24px 19px 36px;
-}
-
-.footer__ps {
-  margin: 0;
-  padding: 0;
-
-  color: var(--text-color-additional);
-  font-size: 14px;
-  line-height: 17px;
-}
-
-.popup {
-  position: fixed;
-  z-index: 10;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-
-  display: none;
-
-  background-color: var(--bac-popup-color);
-}
-
-@keyframes opacity {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.popup_opened {
-  display: block;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  animation: opacity 0.3s ease-in-out infinite;
-  animation-iteration-count: 1;
-}
-
-.popup__scroll {
-  padding: 40px 20px;
-  width: 88%;
-  max-width: 430px;
-  overflow-y: auto;
-  max-height: calc(100vh - 15px);
-  display: flex;
-  flex-direction: column;
-}
-
-.popup__container {
-  position: relative;
-  max-width: 430px;
-  padding: 25px 22px;
-  box-sizing: border-box;
-  z-index: 1;
-
-  color: var(--text-color-secondary);
-
-  border-radius: 10px;
-  background-color: var(--bac-secondary-color);
-}
-
-.popup__title {
-  margin: 0 0 75px;
-
-  font-weight: 900;
-  font-size: 18px;
-  line-height: 22px;
-}
-
-.popup__edit-form {
-  width: 100%;
-}
-
-.popup__close-btn {
-  position: absolute;
-  right: 0;
-  top: -36px;
-
-  margin-bottom: 16px;
-  align-self: flex-end;
-}
-
-.close-btn {
-  padding: 0;
-  border: none;
-  background: none;
-
-  width: 20px;
-  height: 20px;
-
-  cursor: pointer;
-}
-
-.close-btn__svg {
-  width: 100%;
-  height: 100%;
-
-  fill: white;
-}
-
-.edit-form {
-}
-
-.edit-form__input {
-  padding-bottom: 7px;
-  width: 100%;
-
-  font-size: 14px;
-  line-height: 17px;
-
-  border: none;
-  border-bottom: 1px solid var(--bor-input-color);
-
-  transition: border 0.5s ease;
-}
-
-.edit-form__input:focus {
-  outline: none;
-
-  border-bottom: 1px solid var(--bor-input-color-focus);
-}
-
-.edit-form__label {
-  display: block;
-  margin-bottom: 30px;
-}
-
-.edit-form__label:last-child {
-  margin-bottom: 45px;
-}
-
-.edit-form__fieldset {
-  margin: 0;
-  padding: 0;
-  border: none;
-}
-
-.edit-form__save-button {
-  padding: 14px;
-  width: 100%;
-
-  font-size: 14px;
-  line-height: 17px;
-  color: var(--text-color-main);
-
-  border: none;
-  background-color: var(--bac-main-color);
-  cursor: pointer;
-}
-
-@media screen and (max-height: 420px) {
-  .popup__close-btn {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-  }
-
-  .popup__close-btn svg {
-    fill: black;
-  }
-  .popup__scroll {
-    padding: 0;
-  }
-}
-
-@media screen and (min-width: 520px) {
-  .place__item {
-    width: calc(50% - 8.5px);
-  }
-
-  .profile {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 30px;
-  }
-
-  .profile__img {
-    margin-bottom: 0;
-  }
-
-  .profile__text-container {
-    margin-bottom: 0;
-    flex-shrink: 2;
-  }
-
-  .profile__name {
-    max-width: none;
-    margin-right: 18px;
-
-    text-align: left;
-  }
-
-  .profile__title {
-    display: inline-block;
-  }
-
-  .profile__descr {
-    text-align: left;
-  }
-
-  .profile__add-button {
-    align-self: center;
-    min-width: 150px;
-    width: auto;
-  }
-
-  .add-button__svg {
-    width: 22px;
-    height: 22px;
-  }
-
-  .profile__text-container {
-    padding-right: 18px;
-  }
-}
-
-@media screen and (min-width: 700px) {
-  .header {
-    margin: 0 40px;
-    padding: 41px 0;
-  }
-
-  .logo__svg {
-    width: 142px;
-    height: 33px;
-  }
-
-  .place__item {
-    width: calc(33.33% - 11.33px);
-  }
-
-  .profile__add-button {
-    margin-left: auto;
-    max-width: 150px;
-    display: block;
-  }
-
-  .profile {
-    padding-left: 40px;
-    padding-right: 40px;
-    flex-wrap: nowrap;
-  }
-
-  .profile__name {
-    font-size: 42px;
-    line-height: 48px;
-  }
-
-  .profile__descr {
-    font-size: 18px;
-    line-height: 22px;
-  }
-
-  .profile__edit-button {
-    right: -25px;
-    top: 14px;
-  }
-
-  .popup__close-btn {
-    right: -40px;
-    top: -40px;
-  }
-
-  .close-btn {
-    width: 32px;
-    height: 32px;
-  }
-
-  .popup__title {
-    font-size: 24px;
-    line-height: 29px;
-  }
-
-  .popup__container {
-    padding: 36px;
-  }
-
-  .popup__scroll {
-    padding: 40px;
-    /* max-width: 430px; */
-    /* transform: translateX(40px); */
-  }
-
-  .edit-form__save-button {
-    font-size: 18px;
-    line-height: 22px;
-  }
-
-  .popup__title {
-    margin-bottom: 54px;
-  }
-
-  .edit-button {
-    width: 24px;
-    height: 24px;
-  }
-
-  .place {
-    padding: 31px 40px 45px;
-  }
-
-  .footer {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-
-  .footer__ps {
-    font-size: 18px;
-    line-height: 22px;
-  }
-}
+@import url("../blocks/add-button/add-button.css");
+@import url("../blocks/add-button/__svg/add-button__svg.css");
+
+@import url("../blocks/like-button/like-button.css");
+@import url("../blocks/like-button/__svg/like-button__svg.css");
+
+@import url("../blocks/close-button/close-button.css");
+@import url("../blocks/close-button/__svg/close-button__svg.css");
+
+@import url("../blocks/edit-button/edit-button.css");
+@import url("../blocks/edit-button/__svg/edit-button__svg.css");
+
+@import url("../blocks/edit-form/edit-form.css");
+@import url("../blocks/edit-form/__fieldset/edit-form__fieldset.css");
+@import url("../blocks/edit-form/__input/edit-form__input.css");
+@import url("../blocks/edit-form/__label/edit-form__label.css");
+@import url("../blocks/edit-form/__save-button/edit-form__save-button.css");
+
+@import url("../blocks/footer/footer.css");
+@import url("../blocks/footer/__ps/footer__ps.css");
+
+@import url("../blocks/header/header.css");
+
+@import url("../blocks/logo/logo.css");
+@import url("../blocks/logo/__svg/logo__svg.css");
+
+@import url("../blocks/main-title/main-title.css");
+
+@import url("../blocks/main/main.css");
+
+@import url("../blocks/pages/pages.css");
+@import url("../blocks/pages/_popup-opened/pages_popup-opened.css");
+@import url("../blocks/place/place.css");
+@import url("../blocks/place/__like-button/place__like-button.css");
+@import url("../blocks/place/__content/place__content.css");
+@import url("../blocks/place/__img/place__img.css");
+@import url("../blocks/place/__item/place__item.css");
+@import url("../blocks/place/__list/place__list.css");
+@import url("../blocks/place/__name/place__name.css");
+
+@import url("../blocks/popup/popup.css");
+@import url("../blocks/popup/__close-button/popup__close-button.css");
+@import url("../blocks/popup/__container/popup__container.css");
+@import url("../blocks/popup/__edit-form/popup__edit-form.css");
+@import url("../blocks/popup/__scroll/popup__scroll.css");
+@import url("../blocks/popup/__title/popup__title.css");
+@import url("../blocks/popup/_opened/popup_opened.css");
+
+@import url("../blocks/profile/profile.css");
+@import url("../blocks/profile/__add-button/profile__add-button.css");
+@import url("../blocks/profile/__descr/profile__descr.css");
+@import url("../blocks/profile/__edit-button/profile__edit-button.css");
+@import url("../blocks/profile/__img/profile__img.css");
+@import url("../blocks/profile/__name/profile__name.css");
+@import url("../blocks/profile/__text-container/profile__text-container.css");
+@import url("../blocks/profile/__title/profile__title.css");

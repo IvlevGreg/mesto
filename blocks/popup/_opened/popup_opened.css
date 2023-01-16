@@ -1,0 +1,9 @@
+.popup_opened {
+  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation: opacity 0.3s ease-in-out infinite;
+  animation-iteration-count: 1;
+}

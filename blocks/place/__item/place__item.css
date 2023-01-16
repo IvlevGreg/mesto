@@ -1,0 +1,21 @@
+.place__item {
+  padding-bottom: 22px;
+  width: 100%;
+
+  color: var(--text-color-secondary);
+
+  background-color: var(--bac-secondary-color);
+  border-radius: 10px;
+}
+
+@media screen and (min-width: 520px) {
+  .place__item {
+    width: calc(50% - 8.5px);
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .place__item {
+    width: calc(33.33% - 11.33px);
+  }
+}

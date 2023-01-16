@@ -1,0 +1,14 @@
+.profile__text-container {
+  position: relative;
+
+  margin-bottom: 32px;
+  max-width: 80%;
+}
+
+@media screen and (min-width: 520px) {
+  .profile__text-container {
+    margin-bottom: 0;
+    flex-shrink: 2;
+    padding-right: 18px;
+  }
+}
