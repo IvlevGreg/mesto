@@ -13,7 +13,6 @@
 /* blocks */
 
 @import url("../blocks/add-button/add-button.css");
-@import url("../blocks/add-button/__svg/add-button__svg.css");
 
 @import url("../blocks/like-button/like-button.css");
 @import url("../blocks/like-button/__svg/like-button__svg.css");
@@ -23,6 +22,7 @@
 
 @import url("../blocks/edit-button/edit-button.css");
 @import url("../blocks/edit-button/__svg/edit-button__svg.css");
+@import url("../blocks/edit-button/__img/edit-button__img.css");
 
 @import url("../blocks/edit-form/edit-form.css");
 @import url("../blocks/edit-form/__fieldset/edit-form__fieldset.css");
@@ -36,7 +36,7 @@
 @import url("../blocks/header/header.css");
 
 @import url("../blocks/logo/logo.css");
-@import url("../blocks/logo/__svg/logo__svg.css");
+@import url("../blocks/logo/__img/logo__img.css");
 
 @import url("../blocks/main-title/main-title.css");
 
