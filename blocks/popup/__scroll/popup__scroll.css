@@ -3,6 +3,7 @@
   width: 88%;
   max-width: 430px;
   overflow-y: auto;
+  overflow-x: hidden;
   max-height: calc(100vh - 15px);
 }
 @media screen and (max-height: 420px) {
