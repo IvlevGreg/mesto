@@ -6,9 +6,10 @@
   width: 20px;
   height: 20px;
 
-  color: var(--text-color-main);
-  font-size: 40px;
-  line-height: 40px;
+  background-image: url("../../images/icons/icon-close.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
 
   transition: opacity 0.3s ease;
   cursor: pointer;
@@ -24,7 +25,7 @@
 
 @media screen and (min-width: 700px) {
   .close-button {
-    font-size: 60px;
-    line-height: 60px;
+    width: 32px;
+    height: 32px;
   }
 }
