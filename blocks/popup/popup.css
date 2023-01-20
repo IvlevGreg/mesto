@@ -7,6 +7,20 @@
   right: 0;
 
   display: none;
+  justify-content: center;
+  align-items: center;
+
+  animation: opacity 0.3s ease-in-out infinite;
+  animation-iteration-count: 1;
 
   background-color: var(--bac-popup-color);
+}
+
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

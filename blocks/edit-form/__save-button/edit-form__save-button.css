@@ -8,6 +8,7 @@
 
   border: none;
   background-color: var(--bac-main-color);
+  border-radius: 2px;
 
   transition: opacity 0.3s ease;
   cursor: pointer;

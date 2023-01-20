@@ -22,29 +22,27 @@
 <body class="pages">
   <header class="header">
     <a href="#" class="logo">
-      <img class="logo__img" src="./images/logo/logo.svg" alt="логотип Место ">
+      <img class="logo__img" src="./images/logo/logo.svg" alt="логотип Место">
 
       <!-- <svg class="logo__svg">
         <use xlink:href="./images/sprite.svg#logo"></use>
       </svg> -->
 
     </a>
-    <h1 class="main-title">Место где наслаждаются</h1>
   </header>
 
   <main class="main">
     <section class="profile">
       <img class="profile__img" src="./images/profile/JacquesCousteau.jpg" alt="Фото автора">
       <div class="profile__text-container">
-        <h2 class="profile__title">
-          <span class="profile__name">Жак-Ив Кусто</span>
-          <button class="profile__edit-button edit-button">
-            <img class="edit-button__img" src="./images/icons/icon-eddit-button.svg" alt="">
-          </button>
-        </h2>
+        <h1 class="profile__title">
+          Жак-Ив Кусто
+        </h1>
+        <button type="button" class="profile__edit-button edit-button">
+        </button>
         <p class="profile__descr">Исследователь океана</p>
       </div>
-      <button class="add-button profile__add-button">&#43;</button>
+      <button type="button" class="add-button profile__add-button"></button>
     </section>
 
     <section class="place">
@@ -53,9 +51,9 @@
 
           <img src="./images/place/place-baikal.jpg" alt="Кристально чистый лед байкала" class="place__img">
           <div class="place__content">
-            <div class="place__name">Байкал</div>
-            <button class="like-button place__like-button">
-              <img src="./images/icons/icon-like.svg" alt="Кнопка лайка">
+            <h2 class="place__name">Байкал</h2>
+            <button type="button" class="like-button place__like-button">
+              <!-- <img src="./images/icons/icon-like.svg" alt="Кнопка лайка"> -->
 
               <!-- <svg class="like-button__svg">
                 <use xlink:href="./images/sprite.svg#like"></use>
@@ -67,9 +65,9 @@
 
           <img src="./images/place/place-bermamut.jpg" alt="Скалистый хребет на закате" class="place__img">
           <div class="place__content">
-            <div class="place__name">Плато Бермамыт</div>
-            <button class="like-button place__like-button">
-              <img src="./images/icons/icon-like.svg" alt="Кнопка лайка">
+            <h2 class="place__name">Плато Бермамыт</h2>
+            <button type="button" class="like-button place__like-button">
+              <!-- <img src="./images/icons/icon-like.svg" alt="Кнопка лайка"> -->
 
               <!-- <svg class="like-button__svg">
                 <use xlink:href="./images/sprite.svg#like"></use>
@@ -81,9 +79,9 @@
 
           <img src="./images/place/place-elbrus.jpg" alt="Эльбрус летом" class="place__img">
           <div class="place__content">
-            <div class="place__name">Эльбрус</div>
-            <button class="like-button place__like-button">
-              <img src="./images/icons/icon-like.svg" alt="Кнопка лайка">
+            <h2 class="place__name">Эльбрус</h2>
+            <button type="button" class="like-button place__like-button">
+              <!-- <img src="./images/icons/icon-like.svg" alt="Кнопка лайка"> -->
 
               <!-- <svg class="like-button__svg">
                 <use xlink:href="./images/sprite.svg#like"></use>
@@ -96,9 +94,9 @@
           <img src="./images/place/place-guamskoe-gorge.jpg" alt="Гуамское ущелье с кристально чистой водой"
             class="place__img">
           <div class="place__content">
-            <div class="place__name">Гуамское ущелье</div>
-            <button class="like-button place__like-button">
-              <img src="./images/icons/icon-like.svg" alt="Кнопка лайка">
+            <h2 class="place__name">Гуамское ущелье</h2>
+            <button type="button" class="like-button place__like-button">
+              <!-- <img src="./images/icons/icon-like.svg" alt="Кнопка лайка"> -->
 
               <!-- <svg class="like-button__svg">
                 <use xlink:href="./images/sprite.svg#like"></use>
@@ -110,9 +108,9 @@
 
           <img src="./images/place/place-kamchatka.jpg" alt="Вулканы Камчатки" class="place__img">
           <div class="place__content">
-            <div class="place__name">Камчатка</div>
-            <button class="like-button place__like-button">
-              <img src="./images/icons/icon-like.svg" alt="Кнопка лайка">
+            <h2 class="place__name">Камчатка</h2>
+            <button type="button" class="like-button place__like-button">
+              <!-- <img src="./images/icons/icon-like.svg" alt="Кнопка лайка"> -->
 
               <!-- <svg class="like-button__svg">
                 <use xlink:href="./images/sprite.svg#like"></use>
@@ -124,9 +122,9 @@
 
           <img src="./images/place/place-perm.jpg" alt="Устье реки в тумане" class="place__img">
           <div class="place__content">
-            <div class="place__name">Пермский край</div>
-            <button class="like-button place__like-button">
-              <img src="./images/icons/icon-like.svg" alt="Кнопка лайка">
+            <h2 class="place__name">Пермский край</h2>
+            <button type="button" class="like-button place__like-button">
+              <!-- <img src="./images/icons/icon-like.svg" alt="Кнопка лайка"> -->
 
               <!-- <svg class="like-button__svg">
                 <use xlink:href="./images/sprite.svg#like"></use>
@@ -141,15 +139,12 @@
   <div class="popup ">
     <div class="popup__scroll">
       <div class="popup__container">
-        <button class="close-button popup__close-button">
-          &#128937;
-          <!-- <svg class="close-button__svg">
-            <use xlink:href="./images/sprite.svg#close"></use>
-          </svg> -->
+        <button type="button" class="close-button popup__close-button">
+
         </button>
 
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form action="edit-form" class="edit-form popup__edit-form">
+        <form name="edit-form" class="edit-form popup__edit-form">
           <fieldset class="edit-form__fieldset">
             <label class="edit-form__label">
               <input type="text" class="edit-form__input edit-form__input_name">

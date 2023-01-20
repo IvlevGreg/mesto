@@ -2,6 +2,10 @@ const popup = document.querySelector('.popup');
 const editButton = document.querySelector('.profile__edit-button');
 const closeButton = popup.querySelector('.close-button');
 const editForm = popup.querySelector('.edit-form');
+const profileDescr = document.querySelector('.profile__descr');
+const popupInputName = popup.querySelector('.edit-form__input_name');
+const popupInputDescr = popup.querySelector('.edit-form__input_descr');
+const profileTitle = document.querySelector('.profile__title');
 
 function openPopup() {
   popup.classList.add('popup_opened');
@@ -15,30 +19,15 @@ function closePopup() {
 }
 
 function fillPopup() {
-  const popupInputName = popup.querySelector('.edit-form__input_name');
-  const popupInputDescr = popup.querySelector('.edit-form__input_descr');
-  const profileName = document.querySelector('.profile__name');
-  const profileDescr = document.querySelector('.profile__descr');
-
-  popupInputName.value = profileName.textContent.trim();
+  popupInputName.value = profileTitle.textContent.trim();
   popupInputDescr.value = profileDescr.textContent.trim();
 }
 
 function changeProfileValues() {
-  const popupInputName = popup.querySelector('.edit-form__input_name');
-  const popupInputDescr = popup.querySelector('.edit-form__input_descr');
-  const profileName = document.querySelector('.profile__name');
-  const profileDescr = document.querySelector('.profile__descr');
-
-  profileName.textContent = popupInputName.value.trim();
-  console.dir(profileName);
+  profileTitle.textContent = popupInputName.value.trim();
+  console.dir(profileTitle);
   profileDescr.textContent = popupInputDescr.value.trim();
 }
-
-// setTimeout(() => {
-//   changeProfileValues();
-//   console.log('ch');
-// }, 5000);
 
 editButton.addEventListener('click', () => {
   fillPopup();
