@@ -47,115 +47,49 @@
 
     <section class="place">
       <ul class="place__list">
-        <li class="place__item">
 
-          <img src="./images/place/place-baikal.jpg" alt="Кристально чистый лед байкала" class="place__img">
-          <div class="place__content">
-            <h2 class="place__name">Байкал</h2>
-            <button type="button" class="like-button place__like-button">
-              <!-- <img src="./images/icons/icon-like.svg" alt="Кнопка лайка"> -->
-
-              <!-- <svg class="like-button__svg">
-                <use xlink:href="./images/sprite.svg#like"></use>
-              </svg> -->
-            </button>
-          </div>
-        </li>
-        <li class="place__item">
-
-          <img src="./images/place/place-bermamut.jpg" alt="Скалистый хребет на закате" class="place__img">
-          <div class="place__content">
-            <h2 class="place__name">Плато Бермамыт</h2>
-            <button type="button" class="like-button place__like-button">
-              <!-- <img src="./images/icons/icon-like.svg" alt="Кнопка лайка"> -->
-
-              <!-- <svg class="like-button__svg">
-                <use xlink:href="./images/sprite.svg#like"></use>
-              </svg> -->
-            </button>
-          </div>
-        </li>
-        <li class="place__item">
-
-          <img src="./images/place/place-elbrus.jpg" alt="Эльбрус летом" class="place__img">
-          <div class="place__content">
-            <h2 class="place__name">Эльбрус</h2>
-            <button type="button" class="like-button place__like-button">
-              <!-- <img src="./images/icons/icon-like.svg" alt="Кнопка лайка"> -->
-
-              <!-- <svg class="like-button__svg">
-                <use xlink:href="./images/sprite.svg#like"></use>
-              </svg> -->
-            </button>
-          </div>
-        </li>
-        <li class="place__item">
-
-          <img src="./images/place/place-guamskoe-gorge.jpg" alt="Гуамское ущелье с кристально чистой водой"
-            class="place__img">
-          <div class="place__content">
-            <h2 class="place__name">Гуамское ущелье</h2>
-            <button type="button" class="like-button place__like-button">
-              <!-- <img src="./images/icons/icon-like.svg" alt="Кнопка лайка"> -->
-
-              <!-- <svg class="like-button__svg">
-                <use xlink:href="./images/sprite.svg#like"></use>
-              </svg> -->
-            </button>
-          </div>
-        </li>
-        <li class="place__item">
-
-          <img src="./images/place/place-kamchatka.jpg" alt="Вулканы Камчатки" class="place__img">
-          <div class="place__content">
-            <h2 class="place__name">Камчатка</h2>
-            <button type="button" class="like-button place__like-button">
-              <!-- <img src="./images/icons/icon-like.svg" alt="Кнопка лайка"> -->
-
-              <!-- <svg class="like-button__svg">
-                <use xlink:href="./images/sprite.svg#like"></use>
-              </svg> -->
-            </button>
-          </div>
-        </li>
-        <li class="place__item">
-
-          <img src="./images/place/place-perm.jpg" alt="Устье реки в тумане" class="place__img">
-          <div class="place__content">
-            <h2 class="place__name">Пермский край</h2>
-            <button type="button" class="like-button place__like-button">
-              <!-- <img src="./images/icons/icon-like.svg" alt="Кнопка лайка"> -->
-
-              <!-- <svg class="like-button__svg">
-                <use xlink:href="./images/sprite.svg#like"></use>
-              </svg> -->
-            </button>
-          </div>
-        </li>
       </ul>
     </section>
   </main>
 
-  <div class="popup ">
+  <div class="popup">
     <div class="popup__scroll">
       <div class="popup__container">
-        <button type="button" class="close-button popup__close-button">
+        <button type="button" class="close-button popup__close-button"></button>
 
-        </button>
+        <div class="popup__content popup__content_edit">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <form name="edit-form" class="popup-form popup-form_edit popup__popup-form">
+            <fieldset class="popup-form__fieldset">
+              <label class="popup-form__label">
+                <input type="text" class="popup-form__input popup-form__input_name" placeholder="Имя">
+              </label>
 
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <form name="edit-form" class="edit-form popup__edit-form">
-          <fieldset class="edit-form__fieldset">
-            <label class="edit-form__label">
-              <input type="text" class="edit-form__input edit-form__input_name">
-            </label>
+              <label class="popup-form__label">
+                <input type="text" class="popup-form__input popup-form__input_descr" placeholder="Описание">
+              </label>
+            </fieldset>
+            <button type="submit" class="popup-form__submit-button">Сохранить</button>
+          </form>
+        </div>
 
-            <label class="edit-form__label">
-              <input type="text" class="edit-form__input edit-form__input_descr">
-            </label>
-          </fieldset>
-          <button type="submit" class="edit-form__save-button">Сохранить</button>
-        </form>
+        <div class="popup__content popup__content_create">
+          <h2 class="popup__title">Новое место</h2>
+          <form name="create-form" class="popup-form popup-form_create popup__popup-form">
+            <fieldset class="popup-form__fieldset">
+              <label class="popup-form__label">
+                <input type="text" class="popup-form__input popup-form__input_img-name" placeholder="Название">
+              </label>
+
+              <label class="popup-form__label">
+                <input type="text" class="popup-form__input popup-form__input_link" placeholder="Ссылка на картинку">
+              </label>
+            </fieldset>
+            <button type="submit" class="popup-form__submit-button">Создать</button>
+          </form>
+        </div>
+
+
       </div>
     </div>
   </div>
@@ -165,6 +99,17 @@
       &#169; 2023 Mesto Russia
     </p>
   </footer>
+
+  <template id="template-place-item">
+    <li class="place__item">
+
+      <img src="" alt="Устье реки в тумане" class="place__img">
+      <div class="place__content">
+        <h2 class="place__name"></h2>
+        <button type="button" class="like-button place__like-button"></button>
+      </div>
+    </li>
+  </template>
 
   <script src="./scripts/index.js"></script>
 </body>

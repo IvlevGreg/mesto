@@ -1,4 +1,4 @@
-.edit-form__save-button {
+.popup-form__submit-button {
   padding: 14px;
   width: 100%;
 
@@ -14,16 +14,16 @@
   cursor: pointer;
 }
 
-.edit-form__save-button:hover {
+.popup-form__submit-button:hover {
   opacity: 0.8;
 }
 
-.edit-form__save-button:active {
+.popup-form__submit-button:active {
   opacity: 0.6;
 }
 
 @media screen and (min-width: 700px) {
-  .edit-form__save-button {
+  .popup-form__submit-button {
     font-size: 18px;
     line-height: 22px;
   }
