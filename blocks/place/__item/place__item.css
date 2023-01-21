@@ -1,12 +1,14 @@
 .place__item {
   position: relative;
 
-  padding-bottom: 25px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   color: var(--text-color-secondary);
 
-  background-color: var(--bac-secondary-color);
+  background: var(--bac-card-img);
   border-radius: 10px;
 }
 
