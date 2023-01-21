@@ -1,8 +1,8 @@
-.edit-form__label {
+.popup-form__label {
   display: block;
   margin-bottom: 30px;
 }
 
-.edit-form__label:last-child {
+.popup-form__label:last-child {
   margin-bottom: 45px;
 }
