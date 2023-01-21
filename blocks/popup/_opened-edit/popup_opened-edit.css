@@ -1,7 +1,4 @@
 .popup_opened-edit {
-  display: flex;
-}
-
-.popup_opened-edit .popup__content_edit {
-  display: block;
+  opacity: 1;
+  visibility: visible;
 }

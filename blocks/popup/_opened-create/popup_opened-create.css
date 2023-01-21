@@ -1,7 +1,4 @@
 .popup_opened-create {
-  display: flex;
-}
-
-.popup_opened-create .popup__content_create {
-  display: block;
+  opacity: 1;
+  visibility: visible;
 }
