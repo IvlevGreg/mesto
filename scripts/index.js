@@ -48,7 +48,7 @@ const initialPlaceCards = [
   },
 ];
 
-function createPlaceCard(card, template, parent) {
+function createPlaceCard(card, template) {
   const elementLi = template.querySelector('.place__item').cloneNode(true);
 
   const img = elementLi.querySelector('.place__img');
@@ -56,11 +56,11 @@ function createPlaceCard(card, template, parent) {
   img.alt = card.alt || card.name;
   elementLi.querySelector('.place__name').textContent = card.name;
 
-  parent.append(elementLi);
+  return elementLi;
 }
 
 initialPlaceCards.forEach((card) => {
-  createPlaceCard(card, templatePlaceItem, placeList);
+  placeList.append(createPlaceCard(card, templatePlaceItem));
 });
 
 function openPopup(modificator) {
@@ -119,6 +119,6 @@ createForm.addEventListener('submit', (e) => {
     link: popupInputLink.value.trim(),
   };
 
-  createPlaceCard(card, templatePlaceItem, placeList);
+  placeList.prepend(createPlaceCard(card, templatePlaceItem));
   changeProfileValues();
 });
