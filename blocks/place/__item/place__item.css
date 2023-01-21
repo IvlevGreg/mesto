@@ -1,4 +1,6 @@
 .place__item {
+  position: relative;
+
   padding-bottom: 25px;
   width: 100%;
 

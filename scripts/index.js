@@ -57,10 +57,12 @@ function createPlaceCard(card, template) {
   elementLi.querySelector('.place__name').textContent = card.name;
 
   const likeButton = elementLi.querySelector('.place__like-button');
-
   likeButton.addEventListener('click', (e) =>
     e.target.classList.toggle('like-button_active')
   );
+
+  const removeButton = elementLi.querySelector('.place__remove-button');
+  removeButton.addEventListener('click', (e) => elementLi.remove());
 
   return elementLi;
 }
