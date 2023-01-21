@@ -47,91 +47,7 @@
 
     <section class="place">
       <ul class="place__list">
-        <li class="place__item">
 
-          <img src="./images/place/place-baikal.jpg" alt="Кристально чистый лед байкала" class="place__img">
-          <div class="place__content">
-            <h2 class="place__name">Байкал</h2>
-            <button type="button" class="like-button place__like-button">
-              <!-- <img src="./images/icons/icon-like.svg" alt="Кнопка лайка"> -->
-
-              <!-- <svg class="like-button__svg">
-                <use xlink:href="./images/sprite.svg#like"></use>
-              </svg> -->
-            </button>
-          </div>
-        </li>
-        <li class="place__item">
-
-          <img src="./images/place/place-bermamut.jpg" alt="Скалистый хребет на закате" class="place__img">
-          <div class="place__content">
-            <h2 class="place__name">Плато Бермамыт</h2>
-            <button type="button" class="like-button place__like-button">
-              <!-- <img src="./images/icons/icon-like.svg" alt="Кнопка лайка"> -->
-
-              <!-- <svg class="like-button__svg">
-                <use xlink:href="./images/sprite.svg#like"></use>
-              </svg> -->
-            </button>
-          </div>
-        </li>
-        <li class="place__item">
-
-          <img src="./images/place/place-elbrus.jpg" alt="Эльбрус летом" class="place__img">
-          <div class="place__content">
-            <h2 class="place__name">Эльбрус</h2>
-            <button type="button" class="like-button place__like-button">
-              <!-- <img src="./images/icons/icon-like.svg" alt="Кнопка лайка"> -->
-
-              <!-- <svg class="like-button__svg">
-                <use xlink:href="./images/sprite.svg#like"></use>
-              </svg> -->
-            </button>
-          </div>
-        </li>
-        <li class="place__item">
-
-          <img src="./images/place/place-guamskoe-gorge.jpg" alt="Гуамское ущелье с кристально чистой водой"
-            class="place__img">
-          <div class="place__content">
-            <h2 class="place__name">Гуамское ущелье</h2>
-            <button type="button" class="like-button place__like-button">
-              <!-- <img src="./images/icons/icon-like.svg" alt="Кнопка лайка"> -->
-
-              <!-- <svg class="like-button__svg">
-                <use xlink:href="./images/sprite.svg#like"></use>
-              </svg> -->
-            </button>
-          </div>
-        </li>
-        <li class="place__item">
-
-          <img src="./images/place/place-kamchatka.jpg" alt="Вулканы Камчатки" class="place__img">
-          <div class="place__content">
-            <h2 class="place__name">Камчатка</h2>
-            <button type="button" class="like-button place__like-button">
-              <!-- <img src="./images/icons/icon-like.svg" alt="Кнопка лайка"> -->
-
-              <!-- <svg class="like-button__svg">
-                <use xlink:href="./images/sprite.svg#like"></use>
-              </svg> -->
-            </button>
-          </div>
-        </li>
-        <li class="place__item">
-
-          <img src="./images/place/place-perm.jpg" alt="Устье реки в тумане" class="place__img">
-          <div class="place__content">
-            <h2 class="place__name">Пермский край</h2>
-            <button type="button" class="like-button place__like-button">
-              <!-- <img src="./images/icons/icon-like.svg" alt="Кнопка лайка"> -->
-
-              <!-- <svg class="like-button__svg">
-                <use xlink:href="./images/sprite.svg#like"></use>
-              </svg> -->
-            </button>
-          </div>
-        </li>
       </ul>
     </section>
   </main>
@@ -165,6 +81,17 @@
       &#169; 2023 Mesto Russia
     </p>
   </footer>
+
+  <template id="template-place-item">
+    <li class="place__item">
+
+      <img src="" alt="Устье реки в тумане" class="place__img">
+      <div class="place__content">
+        <h2 class="place__name"></h2>
+        <button type="button" class="like-button place__like-button"></button>
+      </div>
+    </li>
+  </template>
 
   <script src="./scripts/index.js"></script>
 </body>
