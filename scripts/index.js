@@ -56,6 +56,12 @@ function createPlaceCard(card, template) {
   img.alt = card.alt || card.name;
   elementLi.querySelector('.place__name').textContent = card.name;
 
+  const likeButton = elementLi.querySelector('.place__like-button');
+
+  likeButton.addEventListener('click', (e) =>
+    e.target.classList.toggle('like-button_active')
+  );
+
   return elementLi;
 }
 

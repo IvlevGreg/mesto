@@ -13,6 +13,7 @@
   background-position: center;
   background-size: 22px 19px;
 }
+
 .like-button:hover {
   opacity: 0.5;
 }
