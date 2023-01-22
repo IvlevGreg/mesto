@@ -72,9 +72,6 @@ const initialPlaceCards = [
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.body.classList.add('pages_popup-opened');
-  if (popup.querySelector('input')) {
-    popup.querySelector('input').focus();
-  }
 }
 
 function closePopup(popup) {
@@ -114,26 +111,17 @@ editButton.addEventListener('click', () => {
   openPopup(popupFormEdit);
 });
 
-editForm.addEventListener('submit', (e) => {
-  e.preventDefault();
+editForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
   closePopup(popupFormEdit);
   changeProfileValues();
 });
 
 // popup create
 
-function clearPopupCreateForm() {
-  popupCreateInputName.value = '';
-  popupCreateInputLink.value = '';
-}
-
 createButton.addEventListener('click', () => {
   fillPopupEditForm();
   openPopup(popupFormCreate);
-});
-
-closeButtonFormCreate.addEventListener('click', () => {
-  closePopup(popupFormCreate);
 });
 
 createForm.addEventListener('submit', (evt) => {
@@ -145,7 +133,8 @@ createForm.addEventListener('submit', (evt) => {
   };
 
   placeList.prepend(createPlaceCard(card, templatePlaceItem));
-  clearPopupCreateForm();
+
+  evt.target.reset();
 });
 
 // cards
