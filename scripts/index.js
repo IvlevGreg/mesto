@@ -171,6 +171,7 @@ function createPlaceCard(card, template) {
   return elementLi;
 }
 
-initialPlaceCards.forEach((card) => {
-  placeList.append(createPlaceCard(card, templatePlaceItem));
-});
+const placeCardsPrepared = initialPlaceCards.map((card) =>
+  createPlaceCard(card, templatePlaceItem)
+);
+placeList.append(...placeCardsPrepared);
