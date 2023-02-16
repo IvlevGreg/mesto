@@ -10,6 +10,6 @@
 ### Overview:
 - Utilized the BEM methodology for HTML markup and Sass implementation
 - Implemented adaptive web design, cross-browser development, responsive images
-- Implemented js form 
+- Implemented js form with validation
 
 ### Deploy: https://ivlevgreg.github.io/mesto/
