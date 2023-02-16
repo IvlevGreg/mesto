@@ -72,11 +72,24 @@ const initialPlaceCards = [
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.body.classList.add('pages_popup-opened');
+  popup.addEventListener('keyup', closePopupKeyEscape);
+}
+
+function closePopupKeyEscape(evt) {
+  if (evt.key == 'Escape' || evt.key == 'Esc' || evt.keyCode == 27) {
+    const popup = document.querySelector('.popup_opened');
+    if (popup) closePopup(popup);
+  }
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.body.classList.remove('pages_popup-opened');
+  popup.removeEventListener('keyup', closePopupKeyEscape);
+}
+
+function getFocusOnFirstInput(popup) {
+  popup.querySelector('input').focus();
 }
 
 closeButtons.forEach((closeButton) => {
