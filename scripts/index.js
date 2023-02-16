@@ -72,11 +72,24 @@ const initialPlaceCards = [
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.body.classList.add('pages_popup-opened');
+  popup.addEventListener('keyup', closePopupKeyEscape);
+}
+
+function closePopupKeyEscape(evt) {
+  if (evt.key == 'Escape' || evt.key == 'Esc' || evt.keyCode == 27) {
+    const popup = document.querySelector('.popup_opened');
+    if (popup) closePopup(popup);
+  }
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.body.classList.remove('pages_popup-opened');
+  popup.removeEventListener('keyup', closePopupKeyEscape);
+}
+
+function getFocusOnFirstInput(popup) {
+  popup.querySelector('input').focus();
 }
 
 closeButtons.forEach((closeButton) => {
@@ -109,6 +122,7 @@ function changeProfileValues() {
 editButton.addEventListener('click', () => {
   fillPopupEditForm();
   openPopup(popupFormEdit);
+  getFocusOnFirstInput(popupFormEdit);
 });
 
 editForm.addEventListener('submit', (evt) => {
@@ -120,8 +134,13 @@ editForm.addEventListener('submit', (evt) => {
 // popup create
 
 createButton.addEventListener('click', () => {
-  fillPopupEditForm();
   openPopup(popupFormCreate);
+  getFocusOnFirstInput(popupFormCreate);
+  disableButton(
+    popupFormCreate,
+    '.popup-form__submit-button',
+    'popup-form__submit-button_disabled'
+  );
 });
 
 createForm.addEventListener('submit', (evt) => {
@@ -175,3 +194,14 @@ const placeCardsPrepared = initialPlaceCards.map((card) =>
   createPlaceCard(card, templatePlaceItem)
 );
 placeList.append(...placeCardsPrepared);
+
+// Validation
+
+enableValidation({
+  formSelector: '.popup__popup-form',
+  inputSelector: '.popup-form__input',
+  submitButtonSelector: '.popup-form__submit-button',
+  inactiveButtonClass: 'popup-form__submit-button_disabled',
+  inputErrorClass: 'popup-form__input_error_active',
+  errorClass: 'popup-form__input-error_active',
+});

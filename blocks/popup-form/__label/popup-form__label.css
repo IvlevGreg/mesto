@@ -1,8 +1,9 @@
 .popup-form__label {
+  position: relative;
   display: block;
-  margin-bottom: 30px;
+  min-height: 56px;
 }
 
 .popup-form__label:last-child {
-  margin-bottom: 45px;
+  margin-bottom: 15px;
 }
