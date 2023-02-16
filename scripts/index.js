@@ -122,6 +122,7 @@ function changeProfileValues() {
 editButton.addEventListener('click', () => {
   fillPopupEditForm();
   openPopup(popupFormEdit);
+  getFocusOnFirstInput(popupFormEdit);
 });
 
 editForm.addEventListener('submit', (evt) => {
@@ -135,6 +136,12 @@ editForm.addEventListener('submit', (evt) => {
 createButton.addEventListener('click', () => {
   fillPopupEditForm();
   openPopup(popupFormCreate);
+  getFocusOnFirstInput(popupFormCreate);
+  disableButton(
+    popupFormCreate,
+    '.popup-form__submit-button',
+    'popup-form__submit-button_disabled'
+  );
 });
 
 createForm.addEventListener('submit', (evt) => {
