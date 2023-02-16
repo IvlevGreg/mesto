@@ -134,7 +134,6 @@ editForm.addEventListener('submit', (evt) => {
 // popup create
 
 createButton.addEventListener('click', () => {
-  fillPopupEditForm();
   openPopup(popupFormCreate);
   getFocusOnFirstInput(popupFormCreate);
   disableButton(
@@ -195,3 +194,14 @@ const placeCardsPrepared = initialPlaceCards.map((card) =>
   createPlaceCard(card, templatePlaceItem)
 );
 placeList.append(...placeCardsPrepared);
+
+// Validation
+
+enableValidation({
+  formSelector: '.popup__popup-form',
+  inputSelector: '.popup-form__input',
+  submitButtonSelector: '.popup-form__submit-button',
+  inactiveButtonClass: 'popup-form__submit-button_disabled',
+  inputErrorClass: 'popup-form__input_error_active',
+  errorClass: 'popup-form__input-error_active',
+});
