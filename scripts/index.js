@@ -45,7 +45,7 @@ function openPopup(popup) {
 }
 
 function closePopupKeyEscape(evt) {
-  if (evt.key == 'Escape' || evt.key == 'Esc' || evt.keyCode == 27) {
+  if (evt.key == 'Escape' ) {
     const popup = document.querySelector('.popup_opened');
     if (popup) closePopup(popup);
   }
