@@ -153,7 +153,7 @@ function createPlaceCard(card, template) {
 
   const openPopupButton = elementLi.querySelector('.place__open-popup-button');
   openPopupButton.addEventListener('click', () => {
-    fillPopupCard(card.name, card.link, alt);
+    fillPopupCard(card.name, card.link, img.alt);
     openPopup(popupCard);
   });
 
