@@ -138,8 +138,7 @@ function createPlaceCard(card, template) {
 
   const img = elementLi.querySelector('.place__img');
   img.src = card.link;
-  const alt = card.alt || card.name;
-  img.alt = alt;
+  img.alt = card.name;
   elementLi.querySelector('.place__name').textContent = card.name;
 
   const likeButton = elementLi.querySelector('.place__like-button');
