@@ -133,6 +133,10 @@ function fillPopupCard(name, src, alt) {
   popupImg.alt = alt;
 }
 
+function toggleButtonClassActive(evt){
+  evt.target.classList.toggle('like-button_active')
+}
+
 function createPlaceCard(card, template) {
   const elementLi = template.querySelector('.place__item').cloneNode(true);
 
@@ -142,9 +146,7 @@ function createPlaceCard(card, template) {
   elementLi.querySelector('.place__name').textContent = card.name;
 
   const likeButton = elementLi.querySelector('.place__like-button');
-  likeButton.addEventListener('click', (evt) =>
-    evt.target.classList.toggle('like-button_active')
-  );
+  likeButton.addEventListener('click', toggleButtonClassActive);
 
   const removeButton = elementLi.querySelector('.place__remove-button');
   removeButton.addEventListener('click', () => elementLi.remove());
