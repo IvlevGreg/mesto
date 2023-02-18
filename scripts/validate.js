@@ -12,8 +12,8 @@ function enableValidation({
     const inputList = Array.from(form.querySelectorAll(inputSelector));
     inputList.forEach((input) => {
       input.addEventListener('input', () => {
-        isInputValid(input, input.validationMessage);
-        isButtonDisabled(
+        toggleInputError(input, input.validationMessage);
+        toggleButtonState(
           form,
           submitButtonSelector,
           inactiveButtonClass,
@@ -23,7 +23,7 @@ function enableValidation({
     });
   });
 
-  function isInputValid(input, errorMessage) {
+  function toggleInputError(input, errorMessage) {
     if (!input.validity.valid) {
       showInputError(input, errorMessage);
     } else {
@@ -47,7 +47,7 @@ function enableValidation({
     errorText.textContent = '';
   }
 }
-function isButtonDisabled(
+function toggleButtonState(
   form,
   submitButtonSelector,
   inactiveButtonClass,
