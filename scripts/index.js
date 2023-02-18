@@ -1,6 +1,6 @@
-const editButton = document.querySelector('.profile__edit-button');
+const buttonEdit = document.querySelector('.profile__edit-button');
 const popupFormEdit = document.querySelector('.popup_edit');
-const editForm = popupFormEdit.querySelector('.popup-form_edit');
+const fromEdit = popupFormEdit.querySelector('.popup-form_edit');
 const profileDescr = document.querySelector('.profile__descr');
 const popupEditInputName = popupFormEdit.querySelector(
   '.popup-form__input_name'
@@ -9,21 +9,21 @@ const popupEditInputDescr = popupFormEdit.querySelector(
   '.popup-form__input_descr'
 );
 
-const closeButtons = document.querySelectorAll('.popup__close-button');
+const buttonsClose = document.querySelectorAll('.popup__close-button');
 const popups = document.querySelectorAll('.popup');
 
 const profileTitle = document.querySelector('.profile__title');
 
-const createButton = document.querySelector('.profile__add-button');
+const buttonCreate = document.querySelector('.profile__add-button');
 const popupFormCreate = document.querySelector('.popup_create');
-const createForm = popupFormCreate.querySelector('.popup-form_create');
+const formCreate = popupFormCreate.querySelector('.popup-form_create');
 const popupCreateInputName = popupFormCreate.querySelector(
   '.popup-form__input_img-name'
 );
 const popupCreateInputLink = popupFormCreate.querySelector(
   '.popup-form__input_link'
 );
-const closeButtonFormCreate = popupFormCreate.querySelector('.close-button');
+const buttonCloseFormCreate = popupFormCreate.querySelector('.close-button');
 
 const popupCard = document.querySelector('.popup_card');
 
@@ -32,7 +32,7 @@ const popupImg = popupCard.querySelector('.popup__img');
 const templatePlaceItem = document.getElementById(
   'template-place-item'
 ).content;
-const placeList = document.querySelector('.place__list');
+const cardsContainer = document.querySelector('.place__list');
 
 const initialPlaceCards = [
   {
@@ -92,7 +92,7 @@ function getFocusOnFirstInput(popup) {
   popup.querySelector('input').focus();
 }
 
-closeButtons.forEach((closeButton) => {
+buttonsClose.forEach((closeButton) => {
   closeButton.addEventListener('click', () => {
     const popup = closeButton.closest('.popup');
     closePopup(popup);
@@ -119,13 +119,13 @@ function changeProfileValues() {
   profileDescr.textContent = popupEditInputDescr.value.trim();
 }
 
-editButton.addEventListener('click', () => {
+buttonEdit.addEventListener('click', () => {
   fillPopupEditForm();
   openPopup(popupFormEdit);
   getFocusOnFirstInput(popupFormEdit);
 });
 
-editForm.addEventListener('submit', (evt) => {
+fromEdit.addEventListener('submit', (evt) => {
   evt.preventDefault();
   closePopup(popupFormEdit);
   changeProfileValues();
@@ -133,7 +133,7 @@ editForm.addEventListener('submit', (evt) => {
 
 // popup create
 
-createButton.addEventListener('click', () => {
+buttonCreate.addEventListener('click', () => {
   openPopup(popupFormCreate);
   getFocusOnFirstInput(popupFormCreate);
   disableButton(
@@ -143,7 +143,7 @@ createButton.addEventListener('click', () => {
   );
 });
 
-createForm.addEventListener('submit', (evt) => {
+formCreate.addEventListener('submit', (evt) => {
   evt.preventDefault();
   closePopup(popupFormCreate);
   const card = {
@@ -151,7 +151,7 @@ createForm.addEventListener('submit', (evt) => {
     link: popupCreateInputLink.value.trim(),
   };
 
-  placeList.prepend(createPlaceCard(card, templatePlaceItem));
+  cardsContainer.prepend(createPlaceCard(card, templatePlaceItem));
 
   evt.target.reset();
 });
@@ -193,7 +193,7 @@ function createPlaceCard(card, template) {
 const placeCardsPrepared = initialPlaceCards.map((card) =>
   createPlaceCard(card, templatePlaceItem)
 );
-placeList.append(...placeCardsPrepared);
+cardsContainer.append(...placeCardsPrepared);
 
 // Validation
 
