@@ -105,15 +105,16 @@ fromEdit.addEventListener('submit', (evt) => {
 buttonCreate.addEventListener('click', () => {
   openPopup(popupFormCreate);
   getFocusOnFirstInput(popupFormCreate);
-  disableButton(
-    popupFormCreate,
-    '.popup-form__submit-button',
-    'popup-form__submit-button_disabled'
-  );
+  
 });
 
 formCreate.addEventListener('submit', (evt) => {
   evt.preventDefault();
+  const buttonSubmit = formCreate.querySelector('.popup-form__submit-button')
+  disableButton(
+    buttonSubmit,
+    'popup-form__submit-button_disabled'
+  );
   closePopup(popupFormCreate);
   const card = {
     name: popupCreateInputName.value.trim(),
