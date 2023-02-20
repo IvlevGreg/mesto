@@ -145,14 +145,14 @@ function createPlaceCard(card, template) {
   img.alt = card.name;
   elementLi.querySelector('.place__name').textContent = card.name;
 
-  const likeButton = elementLi.querySelector('.place__like-button');
-  likeButton.addEventListener('click', toggleButtonClassActive);
+  const buttonLike = elementLi.querySelector('.place__like-button');
+  buttonLike.addEventListener('click', toggleButtonClassActive);
 
-  const removeButton = elementLi.querySelector('.place__remove-button');
-  removeButton.addEventListener('click', () => elementLi.remove());
+  const buttonRemove = elementLi.querySelector('.place__remove-button');
+  buttonRemove.addEventListener('click', () => elementLi.remove());
 
-  const openPopupButton = elementLi.querySelector('.place__open-popup-button');
-  openPopupButton.addEventListener('click', () => {
+  const buttonOpenPopup = elementLi.querySelector('.place__open-popup-button');
+  buttonOpenPopup.addEventListener('click', () => {
     fillPopupCard(card.name, card.link, img.alt);
     openPopup(popupCard);
   });
