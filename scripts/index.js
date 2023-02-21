@@ -17,6 +17,9 @@ const profileTitle = document.querySelector('.profile__title');
 const buttonCreate = document.querySelector('.profile__add-button');
 const popupFormCreate = document.querySelector('.popup_create');
 const formCreate = popupFormCreate.querySelector('.popup-form_create');
+const buttonSubmitFormCreate = formCreate.querySelector(
+  '.popup-form__submit-button'
+);
 const popupCreateInputName = popupFormCreate.querySelector(
   '.popup-form__input_img-name'
 );
@@ -34,8 +37,6 @@ const templatePlaceItem = document.getElementById(
 ).content;
 const cardsContainer = document.querySelector('.place__list');
 
-
-
 // common
 
 function openPopup(popup) {
@@ -45,7 +46,7 @@ function openPopup(popup) {
 }
 
 function closePopupKeyEscape(evt) {
-  if (evt.key == 'Escape' ) {
+  if (evt.key == 'Escape') {
     const popup = document.querySelector('.popup_opened');
     if (popup) closePopup(popup);
   }
@@ -105,16 +106,11 @@ fromEdit.addEventListener('submit', (evt) => {
 buttonCreate.addEventListener('click', () => {
   openPopup(popupFormCreate);
   getFocusOnFirstInput(popupFormCreate);
-  
 });
 
 formCreate.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  const buttonSubmit = formCreate.querySelector('.popup-form__submit-button')
-  disableButton(
-    buttonSubmit,
-    'popup-form__submit-button_disabled'
-  );
+  disableButton(buttonSubmitFormCreate, 'popup-form__submit-button_disabled');
   closePopup(popupFormCreate);
   const card = {
     name: popupCreateInputName.value.trim(),
@@ -134,8 +130,8 @@ function fillPopupCard(name, src, alt) {
   popupImg.alt = alt;
 }
 
-function toggleButtonClassActive(evt){
-  evt.target.classList.toggle('like-button_active')
+function toggleButtonClassActive(evt) {
+  evt.target.classList.toggle('like-button_active');
 }
 
 function createPlaceCard(card, template) {
