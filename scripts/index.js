@@ -37,8 +37,6 @@ const templatePlaceItem = document.getElementById(
 ).content;
 const cardsContainer = document.querySelector('.place__list');
 
-
-
 // common
 
 function openPopup(popup) {
@@ -48,7 +46,7 @@ function openPopup(popup) {
 }
 
 function closePopupKeyEscape(evt) {
-  if (evt.key == 'Escape' ) {
+  if (evt.key == 'Escape') {
     const popup = document.querySelector('.popup_opened');
     if (popup) closePopup(popup);
   }
@@ -108,7 +106,6 @@ fromEdit.addEventListener('submit', (evt) => {
 buttonCreate.addEventListener('click', () => {
   openPopup(popupFormCreate);
   getFocusOnFirstInput(popupFormCreate);
-  
 });
 
 formCreate.addEventListener('submit', (evt) => {
@@ -133,8 +130,8 @@ function fillPopupCard(name, src, alt) {
   popupImg.alt = alt;
 }
 
-function toggleButtonClassActive(evt){
-  evt.target.classList.toggle('like-button_active')
+function toggleButtonClassActive(evt) {
+  evt.target.classList.toggle('like-button_active');
 }
 
 function createPlaceCard(card, template) {
