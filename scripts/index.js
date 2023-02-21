@@ -17,6 +17,9 @@ const profileTitle = document.querySelector('.profile__title');
 const buttonCreate = document.querySelector('.profile__add-button');
 const popupFormCreate = document.querySelector('.popup_create');
 const formCreate = popupFormCreate.querySelector('.popup-form_create');
+const buttonSubmitFormCreate = formCreate.querySelector(
+  '.popup-form__submit-button'
+);
 const popupCreateInputName = popupFormCreate.querySelector(
   '.popup-form__input_img-name'
 );
@@ -110,11 +113,7 @@ buttonCreate.addEventListener('click', () => {
 
 formCreate.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  const buttonSubmit = formCreate.querySelector('.popup-form__submit-button')
-  disableButton(
-    buttonSubmit,
-    'popup-form__submit-button_disabled'
-  );
+  disableButton(buttonSubmitFormCreate, 'popup-form__submit-button_disabled');
   closePopup(popupFormCreate);
   const card = {
     name: popupCreateInputName.value.trim(),
