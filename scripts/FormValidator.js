@@ -1,3 +1,8 @@
+export class FormValidator {
+
+}
+
+
 function enableValidation({
   formSelector,
   inputSelector,
