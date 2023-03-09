@@ -1,3 +1,14 @@
+import { Card } from './Card.js';
+import { initialPlaceCards } from './cardsArray.js';
+import {
+  openPopup,
+  closePopup,
+  fillPopupCard,
+  popupCard,
+  disableButton,
+} from './utils.js';
+import { FormValidator } from './FormValidator.js';
+
 const buttonEdit = document.querySelector('.profile__edit-button');
 const popupFormEdit = document.querySelector('.popup_edit');
 const fromEdit = popupFormEdit.querySelector('.popup-form_edit');
@@ -28,35 +39,12 @@ const popupCreateInputLink = popupFormCreate.querySelector(
 );
 const buttonCloseFormCreate = popupFormCreate.querySelector('.close-button');
 
-const popupCard = document.querySelector('.popup_card');
-
-const popupName = popupCard.querySelector('.popup__name');
-const popupImg = popupCard.querySelector('.popup__img');
 const templatePlaceItem = document.getElementById(
   'template-place-item'
 ).content;
 const cardsContainer = document.querySelector('.place__list');
 
 // common
-
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.body.classList.add('pages_popup-opened');
-  popup.addEventListener('keyup', closePopupKeyEscape);
-}
-
-function closePopupKeyEscape(evt) {
-  if (evt.key == 'Escape') {
-    const popup = document.querySelector('.popup_opened');
-    if (popup) closePopup(popup);
-  }
-}
-
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.body.classList.remove('pages_popup-opened');
-  popup.removeEventListener('keyup', closePopupKeyEscape);
-}
 
 function getFocusOnFirstInput(popup) {
   popup.querySelector('input').focus();
@@ -124,12 +112,6 @@ formCreate.addEventListener('submit', (evt) => {
 
 // cards
 
-function fillPopupCard(name, src, alt) {
-  popupName.textContent = name;
-  popupImg.src = src;
-  popupImg.alt = alt;
-}
-
 function toggleButtonClassActive(evt) {
   evt.target.classList.toggle('like-button_active');
 }
@@ -157,18 +139,25 @@ function createPlaceCard(card, template) {
   return elementLi;
 }
 
-const placeCardsPrepared = initialPlaceCards.map((card) =>
-  createPlaceCard(card, templatePlaceItem)
-);
+const placeCardsPrepared = initialPlaceCards.map((card) => {
+  const cardEl = new Card(card, templatePlaceItem);
+
+  return cardEl.createPlaceCard();
+});
 cardsContainer.append(...placeCardsPrepared);
 
-// Validation
+const forms = Array.from(document.querySelectorAll('.popup__popup-form'));
+forms.forEach((form) => {
+  const formValidator = new FormValidator(
+    {
+      inputSelector: '.popup-form__input',
+      submitButtonSelector: '.popup-form__submit-button',
+      inactiveButtonClass: 'popup-form__submit-button_disabled',
+      inputErrorClass: 'popup-form__input_error_active',
+      errorClass: 'popup-form__input-error_active',
+    },
+    form
+  );
 
-enableValidation({
-  formSelector: '.popup__popup-form',
-  inputSelector: '.popup-form__input',
-  submitButtonSelector: '.popup-form__submit-button',
-  inactiveButtonClass: 'popup-form__submit-button_disabled',
-  inputErrorClass: 'popup-form__input_error_active',
-  errorClass: 'popup-form__input-error_active',
+  formValidator.enableValidation();
 });
