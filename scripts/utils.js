@@ -27,4 +27,9 @@ function fillPopupCard(name, src, alt) {
   popupImg.alt = alt;
 }
 
-export { openPopup, closePopup, fillPopupCard, popupCard };
+function disableButton(button, inactiveButtonClass) {
+  button.classList.add(inactiveButtonClass);
+  button.disabled = true;
+}
+
+export { openPopup, closePopup, fillPopupCard, popupCard, disableButton };

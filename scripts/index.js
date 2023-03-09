@@ -1,6 +1,12 @@
 import { Card } from './Card.js';
 import { initialPlaceCards } from './cardsArray.js';
-import { openPopup, closePopup, fillPopupCard, popupCard } from './utils.js';
+import {
+  openPopup,
+  closePopup,
+  fillPopupCard,
+  popupCard,
+  disableButton,
+} from './utils.js';
 import { FormValidator } from './FormValidator.js';
 
 const buttonEdit = document.querySelector('.profile__edit-button');
@@ -134,25 +140,13 @@ function createPlaceCard(card, template) {
 }
 
 const placeCardsPrepared = initialPlaceCards.map((card) => {
-  // createPlaceCard(card, templatePlaceItem)
   const cardEl = new Card(card, templatePlaceItem);
 
-  console.log(cardEl);
   return cardEl.createPlaceCard();
 });
 cardsContainer.append(...placeCardsPrepared);
 
-// Validation
-
-// enableValidation({
-//   formSelector: '.popup__popup-form',
-//   inputSelector: '.popup-form__input',
-//   submitButtonSelector: '.popup-form__submit-button',
-//   inactiveButtonClass: 'popup-form__submit-button_disabled',
-//   inputErrorClass: 'popup-form__input_error_active',
-//   errorClass: 'popup-form__input-error_active',
-// });
-const forms = Array.from(document.querySelectorAll(formSelector));
+const forms = Array.from(document.querySelectorAll('.popup__popup-form'));
 forms.forEach((form) => {
   const formValidator = new FormValidator(
     {
