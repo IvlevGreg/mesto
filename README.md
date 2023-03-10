@@ -1,17 +1,15 @@
-# Проект: Место
+#  Mesto 🗺️
 
-### Обзор
+## About project:
+### Stack:  
 
-* Figma
-* Картинки
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 
-**Figma**
+### Overview:
+- Utilized the BEM methodology for HTML markup and Sass implementation
+- Implemented adaptive web design, cross-browser development, responsive images
+- Implemented js form with validation
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
-
-**Картинки**
-
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
-
-Удачи!
+### Deploy: https://ivlevgreg.github.io/mesto/
