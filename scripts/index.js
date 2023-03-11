@@ -122,8 +122,7 @@ formCreate.addEventListener('submit', (evt) => {
     link: popupCreateInputLink.value.trim(),
   };
 
-  const cardEl = new Card(card, templatePlaceItem);
-  cardsContainer.prepend(cardEl.createPlaceCard());
+  cardsContainer.prepend(createCard(card,templatePlaceItem));
 
   closePopup(popupFormCreate);
   evt.target.reset();
@@ -131,9 +130,11 @@ formCreate.addEventListener('submit', (evt) => {
 
 // cards
 
-const placeCardsPrepared = initialPlaceCards.map((card) => {
-  const cardEl = new Card(card, templatePlaceItem);
+function createCard(card, template){
+  const cardEl = new Card(card, template);
 
   return cardEl.createPlaceCard();
-});
+}
+
+const placeCardsPrepared = initialPlaceCards.map((card) => createCard(card,templatePlaceItem));
 cardsContainer.append(...placeCardsPrepared);
