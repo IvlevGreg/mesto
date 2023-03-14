@@ -27,6 +27,4 @@ function fillPopupCard(name, src, alt) {
   popupImg.alt = alt;
 }
 
-
-
 export { openPopup, closePopup, fillPopupCard, popupCard };

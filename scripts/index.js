@@ -1,7 +1,8 @@
-import { Card } from './Card.js';
-import { initialPlaceCards } from './cardsArray.js';
-import { openPopup, closePopup } from './utils.js';
-import { FormValidator } from './FormValidator.js';
+import { Card } from './components/Card.js';
+import { initialPlaceCards } from './utils/cardsArray.js';
+import { openPopup, closePopup } from './utils/utils.js';
+import { FormValidator } from './components/FormValidator.js';
+import { Section } from './components/Section.js';
 
 const buttonEdit = document.querySelector('.profile__edit-button');
 const popupFormEdit = document.querySelector('.popup_edit');
@@ -122,7 +123,7 @@ formCreate.addEventListener('submit', (evt) => {
     link: popupCreateInputLink.value.trim(),
   };
 
-  cardsContainer.prepend(createCard(card,templatePlaceItem));
+  cardRenderer(card);
 
   closePopup(popupFormCreate);
   evt.target.reset();
@@ -130,11 +131,13 @@ formCreate.addEventListener('submit', (evt) => {
 
 // cards
 
-function createCard(card, template){
-  const cardEl = new Card(card, template);
-
-  return cardEl.createPlaceCard();
+function cardRenderer(card) {
+  const cardEl = new Card(card, templatePlaceItem);
+  cardList.addItem(cardEl.createPlaceCard());
 }
 
-const placeCardsPrepared = initialPlaceCards.map((card) => createCard(card,templatePlaceItem));
-cardsContainer.append(...placeCardsPrepared);
+const cardList = new Section(
+  { items: initialPlaceCards, renderer: cardRenderer },
+  '.place__list'
+);
+cardList.renderItems();
