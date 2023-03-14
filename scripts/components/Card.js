@@ -1,4 +1,5 @@
 import { openPopup, fillPopupCard, popupCard } from '../utils/utils.js';
+import { popupWithImage } from './PopupWithImage.js';
 
 export class Card {
   constructor(data, selectorTemplate) {
@@ -43,8 +44,7 @@ export class Card {
     );
 
     this._openPopupButtonElement.addEventListener('click', () => {
-      fillPopupCard(this._name, this._link, this._alt);
-      openPopup(popupCard);
+      popupWithImage.open(this._name, this._link, this._alt);
     });
   }
 
