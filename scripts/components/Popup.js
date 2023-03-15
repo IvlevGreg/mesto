@@ -6,7 +6,7 @@ export class Popup {
 
   _handleEscClose(evt) {
     if (evt.key == 'Escape') {
-      this.closePopup(this._popup);
+      this.close();
     }
   }
 
@@ -21,7 +21,6 @@ export class Popup {
   }
 
   open() {
-    console.log(this._popup);
     this._popup.classList.add('popup_opened');
     document.body.classList.add('pages_popup-opened');
 
