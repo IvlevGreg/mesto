@@ -1,13 +1,11 @@
-import { openPopup, fillPopupCard, popupCard } from '../utils/utils.js';
-import { popupWithImage } from './PopupWithImage.js';
-
 export class Card {
-  constructor(data, selectorTemplate) {
+  constructor(data, selectorTemplate, handleCardClick) {
     const { name, link, alt = name } = data;
     this._name = name;
     this._link = link;
     this._alt = alt;
     this._selectorTemplate = selectorTemplate;
+    this._handleCardClick = handleCardClick;
 
     this._liElement = this._selectorTemplate
       .querySelector('.place__item')
@@ -44,7 +42,7 @@ export class Card {
     );
 
     this._openPopupButtonElement.addEventListener('click', () => {
-      popupWithImage.open(this._name, this._link, this._alt);
+      this._handleCardClick(this._name, this._link, this._alt);
     });
   }
 

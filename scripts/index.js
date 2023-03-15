@@ -3,6 +3,7 @@ import { initialPlaceCards } from './utils/cardsArray.js';
 import { openPopup, closePopup } from './utils/utils.js';
 import { FormValidator } from './components/FormValidator.js';
 import { Section } from './components/Section.js';
+import { PopupWithImage } from './components/PopupWithImage.js';
 
 const buttonEdit = document.querySelector('.profile__edit-button');
 const popupFormEdit = document.querySelector('.popup_edit');
@@ -131,8 +132,17 @@ formCreate.addEventListener('submit', (evt) => {
 
 // cards
 
+const popupWithImage = new PopupWithImage(
+  '.popup_card',
+  '.popup__close-button'
+);
+
 function cardRenderer(card) {
-  const cardEl = new Card(card, templatePlaceItem);
+  const cardEl = new Card(
+    card,
+    templatePlaceItem,
+    popupWithImage.open.bind(popupWithImage)
+  );
   cardList.addItem(cardEl.createPlaceCard());
 }
 

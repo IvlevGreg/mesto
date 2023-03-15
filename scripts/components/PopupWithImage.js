@@ -1,9 +1,8 @@
 import { Popup } from './Popup.js';
 
-class PopupWithImage extends Popup {
-  constructor(popupSelector) {
-    super(popupSelector);
-    console.log(this._popup);
+export class PopupWithImage extends Popup {
+  constructor(popupSelector, buttonCloseSelector) {
+    super(popupSelector, buttonCloseSelector);
     this._popupName = this._popup.querySelector('.popup__name');
     this._popupImg = this._popup.querySelector('.popup__img');
   }
@@ -15,5 +14,3 @@ class PopupWithImage extends Popup {
     this._popupImg.alt = alt;
   }
 }
-
-export const popupWithImage = new PopupWithImage('.popup_card');
