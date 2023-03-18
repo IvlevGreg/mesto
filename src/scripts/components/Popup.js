@@ -24,11 +24,6 @@ export class Popup {
         }
     }
 
-
-    _getFocusOnFirstInput() {
-        this._popup.querySelector('input').focus();
-    }
-
     setEventListeners() {
         this._popup.addEventListener(
             'mousedown',

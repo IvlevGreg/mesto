@@ -62,11 +62,11 @@ const formCreateValidator = new FormValidator(
 formCreateValidator.enableValidation();
 
 buttonCreate.addEventListener('click', () => {
+  formCreateValidator.disableButton()
   popupFormCreate.open();
 });
 
 function formCreateCallback(data) {
-  // evt.preventDefault();
   formCreateValidator.disableButton();
   const card = {
     ...data,
@@ -84,12 +84,12 @@ const popupWithImage = new PopupWithImage(
 popupWithImage.setEventListeners()
 
 function createCard(card) {
-    const cardEl = new Card(
-        card,
-        templatePlaceItem,
-        popupWithImage.open.bind(popupWithImage)
-    );
-    return cardEl.createPlaceCard()
+  const cardEl = new Card(
+    card,
+    templatePlaceItem,
+    popupWithImage.open.bind(popupWithImage)
+  );
+  return cardEl.createPlaceCard()
 }
 function rendererCard(card) {
   cardList.addItem(createCard(card));
