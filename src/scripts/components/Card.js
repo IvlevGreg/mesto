@@ -4,10 +4,13 @@ export class Card {
     this._name = name;
     this._link = link;
     this._alt = alt;
-    this._selectorTemplate = selectorTemplate;
     this._handleCardClick = handleCardClick;
 
-    this._liElement = this._selectorTemplate
+    this._template=  document.getElementById(
+        selectorTemplate
+    ).content
+
+    this._liElement = this._template
       .querySelector('.place__item')
       .cloneNode(true);
     this._imgElement = this._liElement.querySelector('.place__img');
@@ -21,8 +24,8 @@ export class Card {
       '.place__remove-button'
     );
   }
-  _toggleButtonClassActive(evt) {
-    evt.target.classList.toggle('like-button_active');
+  _toggleButtonClassActive() {
+    this._likeButtonElement.classList.toggle('like-button_active');
   }
 
   _removeCard() {
@@ -33,12 +36,12 @@ export class Card {
   _setEventListener() {
     this._likeButtonElement.addEventListener(
       'click',
-      this._toggleButtonClassActive
+        () => this._toggleButtonClassActive()
     );
 
     this._removeButtonElement.addEventListener(
       'click',
-      this._removeCard.bind(this)
+        () => this._removeCard()
     );
 
     this._openPopupButtonElement.addEventListener('click', () => {

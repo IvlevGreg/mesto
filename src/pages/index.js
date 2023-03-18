@@ -14,13 +14,12 @@ const formEdit = document.querySelector('.popup-form_edit');
 const buttonCreate = document.querySelector('.profile__add-button');
 const formCreate = document.querySelector('.popup-form_create');
 
-const templatePlaceItem = document.getElementById(
-  'template-place-item'
-).content;
+const templatePlaceItem = 'template-place-item';
 
 //popup edit
 
 const popupFormEdit = new PopupWithForm('.popup_edit', '.popup__close-button');
+popupFormEdit.setEventListeners()
 
 const userInfo = new UserInfo('.profile__title', '.profile__descr');
 
@@ -41,12 +40,6 @@ buttonEdit.addEventListener('click', () => {
   popupFormEdit.open();
 });
 
-formEdit.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  popupFormEdit.close();
-  userInfo.setUserInfo({ ...popupFormEdit.getInputValues() });
-});
-
 // popup create
 
 const popupFormCreate = new PopupWithForm(
@@ -54,6 +47,7 @@ const popupFormCreate = new PopupWithForm(
   '.popup__close-button',
   formCreateCallback
 );
+popupFormCreate.setEventListeners()
 
 const formCreateValidator = new FormValidator(
   {
@@ -71,15 +65,14 @@ buttonCreate.addEventListener('click', () => {
   popupFormCreate.open();
 });
 
-function formCreateCallback(evt) {
-  evt.preventDefault();
+function formCreateCallback(data) {
+  // evt.preventDefault();
   formCreateValidator.disableButton();
   const card = {
-    ...popupFormCreate.getInputValues(),
+    ...data,
   };
-  cardRenderer(card);
+  rendererCard(card);
   popupFormCreate.close();
-  evt.target.reset();
 }
 
 // cards
@@ -88,18 +81,22 @@ const popupWithImage = new PopupWithImage(
   '.popup_card',
   '.popup__close-button'
 );
+popupWithImage.setEventListeners()
 
-function cardRenderer(card) {
-  const cardEl = new Card(
-    card,
-    templatePlaceItem,
-    popupWithImage.open.bind(popupWithImage)
-  );
-  cardList.addItem(cardEl.createPlaceCard());
+function createCard(card) {
+    const cardEl = new Card(
+        card,
+        templatePlaceItem,
+        popupWithImage.open.bind(popupWithImage)
+    );
+    return cardEl.createPlaceCard()
+}
+function rendererCard(card) {
+  cardList.addItem(createCard(card));
 }
 
 const cardList = new Section(
-  { items: initialPlaceCards, renderer: cardRenderer },
+  { items: initialPlaceCards, renderer: rendererCard },
   '.place__list'
 );
 cardList.renderItems();

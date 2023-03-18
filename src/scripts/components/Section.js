@@ -13,8 +13,6 @@ export class Section {
     this._container.prepend(element);
   }
   renderItems() {
-    this.clearHtml();
-
     this._items.forEach((item) => this._renderer(item));
   }
 }
