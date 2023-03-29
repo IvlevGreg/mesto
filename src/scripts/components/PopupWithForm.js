@@ -1,4 +1,4 @@
-import {Popup} from './Popup.js';
+import { Popup } from './Popup.js';
 
 export class PopupWithForm extends Popup {
     constructor(popupSelector, buttonCloseSelector, submitCallback) {
@@ -6,6 +6,10 @@ export class PopupWithForm extends Popup {
         this._submitCallback = submitCallback;
         this._inputs = this._popup.querySelectorAll('input');
         this._form = this._popup.querySelector('form');
+    }
+
+    _getFocusOnFirstInput() {
+        this._popup.querySelector('input').focus();
     }
 
     open() {
@@ -23,7 +27,6 @@ export class PopupWithForm extends Popup {
             this._submitCallback(this._getInputValues())
         });
     }
-
 
     _getInputValues() {
         const obj = {};
