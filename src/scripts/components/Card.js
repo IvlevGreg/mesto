@@ -1,14 +1,23 @@
 export class Card {
-  constructor(data, selectorTemplate, handleCardClick) {
-    const { name, link, alt = name } = data;
+  constructor(
+    data,
+    selectorTemplate,
+    handleCardClick,
+    { putLike, deleteLike }
+  ) {
+    const { name, link, alt = name, likes, _id } = data;
     this._name = name;
     this._link = link;
     this._alt = alt;
     this._handleCardClick = handleCardClick;
+    this._likes = likes;
+    this._id = _id;
+    this._putLike = putLike;
+    this._deleteLike = deleteLike;
 
-    this._template=  document.getElementById(
-        selectorTemplate
-    ).content
+    console.log(this._putLike);
+
+    this._template = document.getElementById(selectorTemplate).content;
 
     this._liElement = this._template
       .querySelector('.place__item')
@@ -19,6 +28,9 @@ export class Card {
     );
     this._likeButtonElement = this._liElement.querySelector(
       '.place__like-button'
+    );
+    this._likeAmountElement = this._liElement.querySelector(
+      '.place__like-amount'
     );
     this._removeButtonElement = this._liElement.querySelector(
       '.place__remove-button'
@@ -33,15 +45,30 @@ export class Card {
     this._liElementent = null;
   }
 
-  _setEventListener() {
-    this._likeButtonElement.addEventListener(
-      'click',
-        () => this._toggleButtonClassActive()
-    );
+  _setLikesAmount(num) {
+    this._likeAmountElement.textContent = num;
+  }
 
-    this._removeButtonElement.addEventListener(
-      'click',
-        () => this._removeCard()
+  _addLike() {
+    this._putLike(this._id).then(({ likes }) =>
+      this._setLikesAmount(likes.length)
+    );
+  }
+
+  _removeLike() {
+    this._deleteLike(this._id).then(({ likes }) =>
+      this._setLikesAmount(likes.length)
+    );
+  }
+
+  _setEventListener() {
+    this._likeButtonElement.addEventListener('click', () => {
+      this._toggleButtonClassActive();
+      this._addLike();
+    });
+
+    this._removeButtonElement.addEventListener('click', () =>
+      this._removeCard()
     );
 
     this._openPopupButtonElement.addEventListener('click', () => {
@@ -53,6 +80,7 @@ export class Card {
     this._imgElement.src = this._link;
     this._imgElement.alt = this._alt;
     this._liElement.querySelector('.place__name').textContent = this._name;
+    this._setLikesAmount(this._likes.length);
 
     this._setEventListener();
     return this._liElement;

@@ -7,6 +7,7 @@ import { Section } from '../scripts/components/Section.js';
 import { PopupWithForm } from '../scripts/components/PopupWithForm.js';
 import { PopupWithImage } from '../scripts/components/PopupWithImage.js';
 import { UserInfo } from '../scripts/components/UserInfo.js';
+import { Api } from '../scripts/components/Api';
 
 const buttonEdit = document.querySelector('.profile__edit-button');
 const formEdit = document.querySelector('.popup-form_edit');
@@ -18,8 +19,16 @@ const templatePlaceItem = 'template-place-item';
 
 //popup edit
 
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-63',
+  headers: {
+    authorization: '7a43c762-4e63-438c-856b-e056a5084ee3',
+    'Content-Type': 'application/json',
+  },
+});
+
 const popupFormEdit = new PopupWithForm('.popup_edit', '.popup__close-button');
-popupFormEdit.setEventListeners()
+popupFormEdit.setEventListeners();
 
 const userInfo = new UserInfo('.profile__title', '.profile__descr');
 
@@ -47,7 +56,7 @@ const popupFormCreate = new PopupWithForm(
   '.popup__close-button',
   formCreateCallback
 );
-popupFormCreate.setEventListeners()
+popupFormCreate.setEventListeners();
 
 const formCreateValidator = new FormValidator(
   {
@@ -62,7 +71,7 @@ const formCreateValidator = new FormValidator(
 formCreateValidator.enableValidation();
 
 buttonCreate.addEventListener('click', () => {
-  formCreateValidator.disableButton()
+  formCreateValidator.disableButton();
   popupFormCreate.open();
 });
 
@@ -71,7 +80,8 @@ function formCreateCallback(data) {
   const card = {
     ...data,
   };
-  rendererCard(card);
+  console.log(data);
+  api.postNewCard(card);
   popupFormCreate.close();
 }
 
@@ -81,22 +91,25 @@ const popupWithImage = new PopupWithImage(
   '.popup_card',
   '.popup__close-button'
 );
-popupWithImage.setEventListeners()
+popupWithImage.setEventListeners();
 
 function createCard(card) {
   const cardEl = new Card(
     card,
     templatePlaceItem,
-    popupWithImage.open.bind(popupWithImage)
+    popupWithImage.open.bind(popupWithImage),
+    api
   );
-  return cardEl.createPlaceCard()
-}
-function rendererCard(card) {
-  cardList.addItem(createCard(card));
+  return cardEl.createPlaceCard();
 }
 
-const cardList = new Section(
-  { items: initialPlaceCards, renderer: rendererCard },
-  '.place__list'
-);
-cardList.renderItems();
+api.getInitialCards().then((res) => {
+  const cardList = new Section(
+    { items: res, renderer: rendererCard },
+    '.place__list'
+  );
+  cardList.renderItems();
+  function rendererCard(card) {
+    cardList.addItem(createCard(card));
+  }
+});
