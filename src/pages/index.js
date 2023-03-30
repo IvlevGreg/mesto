@@ -30,7 +30,12 @@ const api = new Api({
 const popupFormEdit = new PopupWithForm('.popup_edit', '.popup__close-button');
 popupFormEdit.setEventListeners();
 
-const userInfo = new UserInfo('.profile__title', '.profile__descr');
+const main = document.querySelector('.profile');
+
+api.getUserdata().then((data) => {
+  main.prepend(new UserInfo(data, 'template-profile').createUser());
+});
+const userInfo = document.querySelector('.profile');
 
 const formEditValidator = new FormValidator(
   {
@@ -44,10 +49,10 @@ const formEditValidator = new FormValidator(
 );
 formEditValidator.enableValidation();
 
-buttonEdit.addEventListener('click', () => {
-  popupFormEdit.setInputValues({ ...userInfo.getUserInfo() });
-  popupFormEdit.open();
-});
+// buttonEdit.addEventListener('click', () => {
+//   popupFormEdit.setInputValues({ ...userInfo.getUserInfo() });
+//   popupFormEdit.open();
+// });
 
 // popup create
 

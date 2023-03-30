@@ -47,4 +47,12 @@ export class Api {
       },
     }).then((res) => res.json());
   }
+
+  getUserdata() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: {
+        authorization: this._authorization,
+      },
+    }).then((res) => res.json());
+  }
 }
