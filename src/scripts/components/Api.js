@@ -9,12 +9,16 @@ export class Api {
     this.removeCard = this.removeCard.bind(this);
   }
 
+  _parseJson(res) {
+    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+  }
+
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: {
         authorization: this._authorization,
       },
-    }).then((res) => res.json());
+    }).then(this._parseJson);
   }
 
   postNewCard({ name, link }) {
@@ -28,7 +32,7 @@ export class Api {
         name,
         link,
       }),
-    }).then((res) => res.json());
+    }).then(this._parseJson);
   }
 
   removeCard(id) {
@@ -37,7 +41,7 @@ export class Api {
       headers: {
         authorization: this._authorization,
       },
-    }).then((res) => res.json());
+    }).then(this._parseJson);
   }
 
   putLike(id) {
@@ -46,7 +50,7 @@ export class Api {
       headers: {
         authorization: this._authorization,
       },
-    }).then((res) => res.json());
+    }).then(this._parseJson);
   }
 
   deleteLike(id) {
@@ -55,7 +59,7 @@ export class Api {
       headers: {
         authorization: '7a43c762-4e63-438c-856b-e056a5084ee3',
       },
-    }).then((res) => res.json());
+    }).then(this._parseJson);
   }
 
   getUserdata() {
@@ -63,7 +67,7 @@ export class Api {
       headers: {
         authorization: this._authorization,
       },
-    }).then((res) => res.json());
+    }).then(this._parseJson);
   }
 
   updateUserData({ name, about }) {
@@ -77,6 +81,6 @@ export class Api {
         name,
         about,
       }),
-    }).then((res) => res.json());
+    }).then(this._parseJson);
   }
 }
