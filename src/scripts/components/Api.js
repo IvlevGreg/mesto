@@ -2,7 +2,6 @@ export class Api {
   constructor({ baseUrl, headers: { authorization } }) {
     this._baseUrl = baseUrl;
     this._authorization = authorization;
-    this._contentType = 'application/json';
 
     this.putLike = this.putLike.bind(this);
     this.deleteLike = this.deleteLike.bind(this);
@@ -26,7 +25,7 @@ export class Api {
       method: 'POST',
       headers: {
         authorization: this._authorization,
-        ['Content-Type']: this._contentType,
+        ['Content-Type']: 'application/json',
       },
       body: JSON.stringify({
         name,
