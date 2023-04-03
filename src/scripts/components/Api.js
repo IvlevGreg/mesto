@@ -6,6 +6,7 @@ export class Api {
 
     this.putLike = this.putLike.bind(this);
     this.deleteLike = this.deleteLike.bind(this);
+    this.removeCard = this.removeCard.bind(this);
   }
 
   getInitialCards() {
@@ -27,6 +28,15 @@ export class Api {
         name,
         link,
       }),
+    }).then((res) => res.json());
+  }
+
+  removeCard(id) {
+    return fetch(`${this._baseUrl}/cards/${id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._authorization,
+      },
     }).then((res) => res.json());
   }
 

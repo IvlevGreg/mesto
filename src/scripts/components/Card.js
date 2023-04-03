@@ -3,7 +3,8 @@ export class Card {
     data,
     selectorTemplate,
     handleCardClick,
-    { putLike, deleteLike }
+    { putLike, deleteLike, removeCard: removeCardApi },
+    userId
   ) {
     const { name, link, alt = name, likes, _id } = data;
     this._name = name;
@@ -41,8 +42,10 @@ export class Card {
   }
 
   _removeCard() {
-    this._liElement.remove();
-    this._liElementent = null;
+    this._removeCardApi(this._id).then(() => {
+      this._liElement.remove();
+      this._liElementent = null;
+    });
   }
 
   _setLikesAmount(num) {
