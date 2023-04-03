@@ -6,18 +6,31 @@ export class Card {
     { putLike, deleteLike, removeCard: removeCardApi },
     userId
   ) {
-    const { name, link, alt = name, likes, _id } = data;
+    this._handleCardClick = handleCardClick;
+    this._userId = userId;
+
+    // data
+    const {
+      name,
+      link,
+      alt = name,
+      likes,
+      _id,
+      owner: { _id: authorId },
+    } = data;
+
     this._name = name;
     this._link = link;
     this._alt = alt;
-    this._handleCardClick = handleCardClick;
     this._likes = likes;
     this._id = _id;
+    this._authorId = authorId;
+
+    //api
     this._putLike = putLike;
     this._deleteLike = deleteLike;
 
-    console.log(this._putLike);
-
+    //template
     this._template = document.getElementById(selectorTemplate).content;
 
     this._liElement = this._template
@@ -37,8 +50,8 @@ export class Card {
       '.place__remove-button'
     );
   }
-  _toggleButtonClassActive() {
-    this._likeButtonElement.classList.toggle('like-button_active');
+  _toggleButtonClassActive(bollean) {
+    this._likeButtonElement.classList.toggle('like-button_active', bollean);
   }
 
   _removeCard() {
@@ -52,22 +65,36 @@ export class Card {
     this._likeAmountElement.textContent = num;
   }
 
+  _setLikes(likes) {
+    this._setLikesAmount(likes.length);
+    this._likes = likes;
+  }
+
   _addLike() {
-    this._putLike(this._id).then(({ likes }) =>
-      this._setLikesAmount(likes.length)
-    );
+    this._setLikesAmount('...');
+    this._putLike(this._id)
+      .then(({ likes }) => {
+        this._setLikes(likes);
+      })
+      .catch(() => this._setLikesAmount('Упс...'));
   }
 
   _removeLike() {
-    this._deleteLike(this._id).then(({ likes }) =>
-      this._setLikesAmount(likes.length)
-    );
+    this._deleteLike(this._id).then(({ likes }) => {
+      this._setLikes(likes);
+    });
+  }
+
+  _isUserLike() {
+    return this._likes.findIndex(({ _id }) => this._userId === _id) > -1;
+  }
+
   }
 
   _setEventListener() {
     this._likeButtonElement.addEventListener('click', () => {
       this._toggleButtonClassActive();
-      this._addLike();
+      this._isUserLike() ? this._removeLike() : this._addLike();
     });
 
     this._removeButtonElement.addEventListener('click', () =>
@@ -83,7 +110,10 @@ export class Card {
     this._imgElement.src = this._link;
     this._imgElement.alt = this._alt;
     this._liElement.querySelector('.place__name').textContent = this._name;
+
     this._setLikesAmount(this._likes.length);
+    this._toggleButtonClassActive(this._isUserLike());
+
 
     this._setEventListener();
     return this._liElement;
