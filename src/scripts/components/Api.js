@@ -65,4 +65,18 @@ export class Api {
       },
     }).then((res) => res.json());
   }
+
+  updateUserData({ name, about }) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._authorization,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        about,
+      }),
+    }).then((res) => res.json());
+  }
 }
