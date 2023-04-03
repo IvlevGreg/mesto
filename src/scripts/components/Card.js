@@ -29,6 +29,7 @@ export class Card {
     //api
     this._putLike = putLike;
     this._deleteLike = deleteLike;
+    this._removeCardApi = removeCardApi;
 
     //template
     this._template = document.getElementById(selectorTemplate).content;
@@ -89,6 +90,8 @@ export class Card {
     return this._likes.findIndex(({ _id }) => this._userId === _id) > -1;
   }
 
+  _isUserAuthor() {
+    return this._authorId === this._userId;
   }
 
   _setEventListener() {
@@ -114,6 +117,7 @@ export class Card {
     this._setLikesAmount(this._likes.length);
     this._toggleButtonClassActive(this._isUserLike());
 
+    if (!this._isUserAuthor()) this._removeButtonElement.remove();
 
     this._setEventListener();
     return this._liElement;
