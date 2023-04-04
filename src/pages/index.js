@@ -1,7 +1,6 @@
 import './index.css';
 
 import { Card } from '../scripts/components/Card.js';
-import { initialPlaceCards } from '../scripts/utils/cardsArray.js';
 import { FormValidator } from '../scripts/components/FormValidator.js';
 import { Section } from '../scripts/components/Section.js';
 import { PopupWithForm } from '../scripts/components/PopupWithForm.js';
@@ -33,15 +32,34 @@ const popupWithImage = new PopupWithImage(
 );
 popupWithImage.setEventListeners();
 
+const popupFormCardRemove = new PopupWithForm(
+  '.popup_card-remove',
+  '.popup__close-button',
+  formCardRemoveCallback
+);
+popupFormCardRemove.setEventListeners();
+
+function formCardRemoveCallback() {
+  popupFormCardRemove.close();
+}
+
 function createCard(card, id) {
   const cardEl = new Card(
     card,
     templatePlaceItem,
-    popupWithImage.open.bind(popupWithImage),
+    {
+      handleCardClick: popupWithImage.open.bind(popupWithImage),
+      handleRemovePopup: removeCard,
+    },
     api,
     id
   );
   return cardEl.createPlaceCard();
+}
+
+function removeCard(callback) {
+  popupFormCardRemove.open.call(popupFormCardRemove);
+  popupFormCardRemove._popup.addEventListener('submit', callback);
 }
 
 function rendererCard(card) {
@@ -109,13 +127,11 @@ buttonCreate.addEventListener('click', () => {
   popupFormCreate.open();
 });
 
-function formCreateCallback(data) {
+function formCreateCallback() {
   formCreateValidator.disableButton();
   popupFormCreate.setStatus('isLoading');
-  const card = {
-    ...data,
-  };
-  console.log(data);
+  const { ...card } = popupFormCreate.getInputValues();
+
   api
     .postNewCard(card)
     .then((card) => {

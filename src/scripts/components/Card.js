@@ -2,13 +2,10 @@ export class Card {
   constructor(
     data,
     selectorTemplate,
-    handleCardClick,
+    { handleCardClick, handleRemovePopup },
     { putLike, deleteLike, removeCard: removeCardApi },
     userId
   ) {
-    this._handleCardClick = handleCardClick;
-    this._userId = userId;
-
     // data
     const {
       name,
@@ -25,6 +22,10 @@ export class Card {
     this._likes = likes;
     this._id = _id;
     this._authorId = authorId;
+
+    // popup
+    this._handleCardClick = handleCardClick;
+    this._handleRemovePopup = handleRemovePopup;
 
     //api
     this._putLike = putLike;
@@ -50,6 +51,8 @@ export class Card {
     this._removeButtonElement = this._liElement.querySelector(
       '.place__remove-button'
     );
+
+    this._userId = userId;
   }
   _toggleButtonClassActive(bollean) {
     this._likeButtonElement.classList.toggle('like-button_active', bollean);
@@ -100,9 +103,9 @@ export class Card {
       this._isUserLike() ? this._removeLike() : this._addLike();
     });
 
-    if (!this._isUserAuthor()) {
+    if (this._isUserAuthor()) {
       this._removeButtonElement.addEventListener('click', () =>
-        this._handleRemovePopup()
+        this._handleRemovePopup(this._removeCard.bind(this))
       );
     }
 
