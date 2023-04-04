@@ -64,7 +64,6 @@ function removeCard(callback) {
 }
 
 function rendererCard(card, id) {
-  console.log(id);
   cardList.addItem(createCard(card, id));
 }
 
@@ -89,7 +88,6 @@ api.getUserdata().then((data) => {
   // create cards
 
   api.getInitialCards().then((res) => {
-    console.log(data._id);
     cardList.renderItems(res, data._id);
   });
 
