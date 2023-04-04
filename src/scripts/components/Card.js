@@ -100,9 +100,11 @@ export class Card {
       this._isUserLike() ? this._removeLike() : this._addLike();
     });
 
-    this._removeButtonElement.addEventListener('click', () =>
-      this._removeCard()
-    );
+    if (!this._isUserAuthor()) {
+      this._removeButtonElement.addEventListener('click', () =>
+        this._handleRemovePopup()
+      );
+    }
 
     this._openPopupButtonElement.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link, this._alt);
