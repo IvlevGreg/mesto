@@ -13,7 +13,7 @@ export class Section {
       ? this._container.append(element)
       : this._container.prepend(element);
   }
-  renderItems(items) {
-    items.forEach((item) => this._renderer(item));
+  renderItems(items, id) {
+    items.forEach((item) => this._renderer(item, id));
   }
 }

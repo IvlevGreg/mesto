@@ -54,6 +54,7 @@ function createCard(card, id) {
     api,
     id
   );
+
   return cardEl.createPlaceCard();
 }
 
@@ -62,15 +63,12 @@ function removeCard(callback) {
   popupFormCardRemove._popup.addEventListener('submit', callback);
 }
 
-function rendererCard(card) {
-  cardList.addItem(createCard(card, '02ea6e04703db97645a2b30c'));
+function rendererCard(card, id) {
+  console.log(id);
+  cardList.addItem(createCard(card, id));
 }
 
 const cardList = new Section({ renderer: rendererCard }, '.place__list');
-
-api.getInitialCards().then((res) => {
-  cardList.renderItems(res);
-});
 
 //popup edit
 
@@ -86,6 +84,45 @@ api.getUserdata().then((data) => {
   buttonEdit.addEventListener('click', () => {
     popupFormEdit.setInputValues({ ...userInfo.getUserInfo() });
     popupFormEdit.open();
+  });
+
+  // create cards
+
+  api.getInitialCards().then((res) => {
+    console.log(data._id);
+    cardList.renderItems(res, data._id);
+  });
+
+  function formCreateCallback(id) {
+    formCreateValidator.disableButton();
+    popupFormCreate.setStatus('isLoading');
+    const { ...card } = popupFormCreate.getInputValues();
+
+    api
+      .postNewCard(card)
+      .then((card) => {
+        cardList.addItem(createCard(card, id), false);
+        popupFormCreate.close();
+        popupFormCreate.setStatus('success');
+      })
+      .catch((error) => {
+        popupFormCreate.setStatus('error');
+      })
+      .finally(() => {
+        formCreateValidator.enableButton();
+      });
+  }
+
+  const popupFormCreate = new PopupWithForm(
+    '.popup_create',
+    '.popup__close-button',
+    formCreateCallback.bind(data._id)
+  );
+  popupFormCreate.setEventListeners();
+
+  buttonCreate.addEventListener('click', () => {
+    formCreateValidator.disableButton();
+    popupFormCreate.open();
   });
 });
 
@@ -103,13 +140,6 @@ formEditValidator.enableValidation();
 
 // popup create
 
-const popupFormCreate = new PopupWithForm(
-  '.popup_create',
-  '.popup__close-button',
-  formCreateCallback
-);
-popupFormCreate.setEventListeners();
-
 const formCreateValidator = new FormValidator(
   {
     inputSelector: '.popup-form__input',
@@ -121,28 +151,3 @@ const formCreateValidator = new FormValidator(
   formCreate
 );
 formCreateValidator.enableValidation();
-
-buttonCreate.addEventListener('click', () => {
-  formCreateValidator.disableButton();
-  popupFormCreate.open();
-});
-
-function formCreateCallback() {
-  formCreateValidator.disableButton();
-  popupFormCreate.setStatus('isLoading');
-  const { ...card } = popupFormCreate.getInputValues();
-
-  api
-    .postNewCard(card)
-    .then((card) => {
-      cardList.addItem(createCard(card, '02ea6e04703db97645a2b30c'), false);
-      popupFormCreate.close();
-      popupFormCreate.setStatus('success');
-    })
-    .catch((error) => {
-      popupFormCreate.setStatus('error');
-    })
-    .finally(() => {
-      formCreateValidator.enableButton();
-    });
-}
