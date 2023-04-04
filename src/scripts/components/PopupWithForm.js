@@ -12,7 +12,9 @@ export class PopupWithForm extends Popup {
   }
 
   _getFocusOnFirstInput() {
-    this._popup.querySelector('input').focus();
+    if (this._popup.querySelector('input')) {
+      this._popup.querySelector('input').focus();
+    }
   }
 
   open() {
