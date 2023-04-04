@@ -43,7 +43,7 @@ function formCardRemoveCallback() {
   popupFormCardRemove.close();
 }
 
-function createCard(card, id) {
+function createCard(card, userId) {
   const cardEl = new Card(
     card,
     templatePlaceItem,
@@ -52,7 +52,7 @@ function createCard(card, id) {
       handleRemovePopup: removeCard,
     },
     api,
-    id
+    userId
   );
 
   return cardEl.createPlaceCard();
@@ -91,7 +91,8 @@ api.getUserdata().then((data) => {
     cardList.renderItems(res, data._id);
   });
 
-  function formCreateCallback(id) {
+  function formCreateCallback() {
+    console.log(data._id);
     formCreateValidator.disableButton();
     popupFormCreate.setStatus('isLoading');
     const { ...card } = popupFormCreate.getInputValues();
@@ -99,7 +100,7 @@ api.getUserdata().then((data) => {
     api
       .postNewCard(card)
       .then((card) => {
-        cardList.addItem(createCard(card, id), false);
+        cardList.addItem(createCard(card, data._id), false);
         popupFormCreate.close();
         popupFormCreate.setStatus('success');
       })
@@ -114,7 +115,7 @@ api.getUserdata().then((data) => {
   const popupFormCreate = new PopupWithForm(
     '.popup_create',
     '.popup__close-button',
-    formCreateCallback.bind(data._id)
+    formCreateCallback
   );
   popupFormCreate.setEventListeners();
 
