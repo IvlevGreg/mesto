@@ -20,7 +20,7 @@ export class Card {
     this._link = link;
     this._alt = alt;
     this._likes = likes;
-    this._id = _id;
+    this._cardId = _id;
     this._authorId = authorId;
 
     // popup
@@ -59,7 +59,7 @@ export class Card {
   }
 
   _removeCard() {
-    this._removeCardApi(this._id).then(() => {
+    this._removeCardApi(this._cardId).then(() => {
       this._liElement.remove();
       this._liElementent = null;
     });
@@ -76,7 +76,7 @@ export class Card {
 
   _addLike() {
     this._setLikesAmount('...');
-    this._putLike(this._id)
+    this._putLike(this._cardId)
       .then(({ likes }) => {
         this._setLikes(likes);
       })
@@ -84,7 +84,7 @@ export class Card {
   }
 
   _removeLike() {
-    this._deleteLike(this._id).then(({ likes }) => {
+    this._deleteLike(this._cardId).then(({ likes }) => {
       this._setLikes(likes);
     });
   }
@@ -99,8 +99,8 @@ export class Card {
 
   _setEventListener() {
     this._likeButtonElement.addEventListener('click', () => {
-      this._toggleButtonClassActive();
       this._isUserLike() ? this._removeLike() : this._addLike();
+      this._toggleButtonClassActive();
     });
 
     if (this._isUserAuthor()) {
