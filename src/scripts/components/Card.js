@@ -59,10 +59,14 @@ export class Card {
   }
 
   _removeCard() {
-    this._removeCardApi(this._cardId).then(() => {
-      this._liElement.remove();
-      this._liElementent = null;
-    });
+    this._removeCardApi(this._cardId)
+      .then(() => {
+        this._liElement.remove();
+        this._liElementent = null;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   _setLikesAmount(num) {

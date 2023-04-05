@@ -9,11 +9,9 @@ import { UserInfo } from '../scripts/components/UserInfo.js';
 import { Api } from '../scripts/components/Api';
 
 const buttonEdit = document.querySelector('.profile__edit-button');
-
 const buttonCreate = document.querySelector('.profile__add-button');
-
 const templatePlaceItem = 'template-place-item';
-
+const profileContainer = document.querySelector('.profile');
 const formValidatorSelectorsProps = {
   inputSelector: '.popup-form__input',
   submitButtonSelector: '.popup-form__submit-button',
@@ -64,13 +62,13 @@ function createCard(card, userId) {
   return cardEl.createPlaceCard();
 }
 
+function rendererCard(card, id) {
+  cardList.addItem(createCard(card, id));
+}
+
 function removeCard(callback) {
   popupFormCardRemove.open.call(popupFormCardRemove);
   popupFormCardRemove._popup.addEventListener('submit', callback);
-}
-
-function rendererCard(card, id) {
-  cardList.addItem(createCard(card, id));
 }
 
 const cardList = new Section({ renderer: rendererCard }, '.place__list');
@@ -82,8 +80,6 @@ const formEditValidator = new FormValidator(
   '.popup-form_edit'
 );
 formEditValidator.enableValidation();
-
-const profileContainer = document.querySelector('.profile');
 
 api
   .getUserdata()
