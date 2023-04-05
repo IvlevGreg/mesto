@@ -1,5 +1,9 @@
 export class UserInfo {
-  constructor(data, selectorTemplate, { handleImgClick }) {
+  constructor(
+    data,
+    selectorTemplate,
+    { handleImgCallback, handleProfileEditCallback, handleAddButtonCallback }
+  ) {
     const { name, about, avatar } = data;
     this._name = name;
     this._about = about;
@@ -7,20 +11,36 @@ export class UserInfo {
 
     this._template = document.getElementById(selectorTemplate).content;
     this._sectionElement = this._template
-      .querySelector('.container')
+      .querySelector('.profile')
       .cloneNode(true);
 
     this._imgButtonElement =
       this._sectionElement.querySelector('.profile__img-btn');
+    this._editButtonElement = this._sectionElement.querySelector(
+      '.profile__edit-button'
+    );
+    this._addButtonElement = this._sectionElement.querySelector(
+      '.profile__add-button'
+    );
     this._imgElement = this._sectionElement.querySelector('.profile__img');
     this._nameElement = this._sectionElement.querySelector('.profile__title');
     this._aboutElement = this._sectionElement.querySelector('.profile__descr');
 
-    this._handleImgClick = handleImgClick;
+    this._handleImgCallback = handleImgCallback;
+    this.handleProfileEditCallback = handleProfileEditCallback;
+    this.handleAddButtonCallback = handleAddButtonCallback;
   }
 
   _setEventListener() {
-    this._imgButtonElement.addEventListener('click', this._handleImgClick);
+    this._imgButtonElement.addEventListener('click', this._handleImgCallback);
+    this._editButtonElement.addEventListener(
+      'click',
+      this.handleProfileEditCallback
+    );
+    this._addButtonElement.addEventListener(
+      'click',
+      this.handleAddButtonCallback
+    );
   }
 
   getUserInfo() {

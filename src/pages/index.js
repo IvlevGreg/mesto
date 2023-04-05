@@ -8,10 +8,9 @@ import { PopupWithImage } from '../scripts/components/PopupWithImage.js';
 import { UserInfo } from '../scripts/components/UserInfo.js';
 import { Api } from '../scripts/components/Api';
 
-const buttonEdit = document.querySelector('.profile__edit-button');
 const buttonCreate = document.querySelector('.profile__add-button');
 const templatePlaceItem = 'template-place-item';
-const profileContainer = document.querySelector('.profile');
+const profileContainer = document.querySelector('.main');
 const formValidatorSelectorsProps = {
   inputSelector: '.popup-form__input',
   submitButtonSelector: '.popup-form__submit-button',
@@ -84,10 +83,6 @@ formEditValidator.enableValidation();
 api
   .getUserdata()
   .then((data) => {
-    function handleImgClick() {
-      popupFormImgEdit.open();
-    }
-
     const popupFormImgEdit = new PopupWithForm(
       '.popup_profile-img-edit',
       '.popup__close-button',
@@ -116,13 +111,26 @@ api
     );
     formEditImgValidator.enableValidation();
 
-    const userInfo = new UserInfo(data, 'template-profile', { handleImgClick });
+    const userInfo = new UserInfo(data, 'template-profile', {
+      handleImgCallback,
+      handleProfileEditCallback,
+      handleAddButtonCallback,
+    });
     profileContainer.prepend(userInfo.createUser());
 
-    buttonEdit.addEventListener('click', () => {
+    function handleProfileEditCallback() {
       popupFormEdit.setInputValues({ ...userInfo.getUserInfo() });
       popupFormEdit.open();
-    });
+    }
+
+    function handleAddButtonCallback() {
+      formCreateValidator.disableButton();
+      popupFormCreate.open();
+    }
+
+    function handleImgCallback() {
+      popupFormImgEdit.open();
+    }
 
     const popupFormEdit = new PopupWithForm(
       '.popup_edit',
@@ -184,11 +192,6 @@ api
       formCreateCallback
     );
     popupFormCreate.setEventListeners();
-
-    buttonCreate.addEventListener('click', () => {
-      formCreateValidator.disableButton();
-      popupFormCreate.open();
-    });
   })
   .catch((error) => {
     console.log(error);
