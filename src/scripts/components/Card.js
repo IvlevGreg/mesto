@@ -84,9 +84,12 @@ export class Card {
   }
 
   _removeLike() {
-    this._deleteLike(this._cardId).then(({ likes }) => {
-      this._setLikes(likes);
-    });
+    this._setLikesAmount('...');
+    this._deleteLike(this._cardId)
+      .then(({ likes }) => {
+        this._setLikes(likes);
+      })
+      .catch(() => this._setLikesAmount('Упс...'));
   }
 
   _isUserLike() {

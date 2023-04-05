@@ -71,19 +71,51 @@ const cardList = new Section({ renderer: rendererCard }, '.place__list');
 
 //popup edit
 
-const popupFormEdit = new PopupWithForm('.popup_edit', '.popup__close-button');
-popupFormEdit.setEventListeners();
+const formEditValidator = new FormValidator(
+  {
+    inputSelector: '.popup-form__input',
+    submitButtonSelector: '.popup-form__submit-button',
+    inactiveButtonClass: 'popup-form__submit-button_disabled',
+    inputErrorClass: 'popup-form__input_error_active',
+    errorClass: 'popup-form__input-error_active',
+  },
+  formEdit
+);
+formEditValidator.enableValidation();
 
-const main = document.querySelector('.profile');
+const profileContainer = document.querySelector('.profile');
 
 api.getUserdata().then((data) => {
   const userInfo = new UserInfo(data, 'template-profile');
-  main.prepend(userInfo.createUser());
+  profileContainer.prepend(userInfo.createUser());
 
   buttonEdit.addEventListener('click', () => {
     popupFormEdit.setInputValues({ ...userInfo.getUserInfo() });
     popupFormEdit.open();
   });
+
+  const popupFormEdit = new PopupWithForm(
+    '.popup_edit',
+    '.popup__close-button',
+    formEditCallback
+  );
+
+  function formEditCallback() {
+    popupFormEdit.setStatus('isLoading');
+    api
+      .updateUserData({ ...popupFormEdit.getInputValues() })
+      .then((res) => {
+        userInfo.setUserInfo(res);
+        popupFormEdit.close();
+        popupFormEdit.setStatus('success');
+      })
+      .catch((error) => {
+        popupFormCreate.setStatus('error');
+        throw new Error(error);
+      });
+  }
+
+  popupFormEdit.setEventListeners();
 
   // create cards
 
@@ -106,6 +138,7 @@ api.getUserdata().then((data) => {
       })
       .catch((error) => {
         popupFormCreate.setStatus('error');
+        throw new Error(error);
       })
       .finally(() => {
         formCreateValidator.enableButton();
@@ -124,18 +157,6 @@ api.getUserdata().then((data) => {
     popupFormCreate.open();
   });
 });
-
-const formEditValidator = new FormValidator(
-  {
-    inputSelector: '.popup-form__input',
-    submitButtonSelector: '.popup-form__submit-button',
-    inactiveButtonClass: 'popup-for m__submit-button_disabled',
-    inputErrorClass: 'popup-form__input_error_active',
-    errorClass: 'popup-form__input-error_active',
-  },
-  formEdit
-);
-formEditValidator.enableValidation();
 
 // popup create
 
