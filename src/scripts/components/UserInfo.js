@@ -1,5 +1,5 @@
 export class UserInfo {
-  constructor(data, selectorTemplate) {
+  constructor(data, selectorTemplate, { handleImgClick }) {
     const { name, about, avatar } = data;
     this._name = name;
     this._about = about;
@@ -10,9 +10,17 @@ export class UserInfo {
       .querySelector('.container')
       .cloneNode(true);
 
+    this._imgButtonElement =
+      this._sectionElement.querySelector('.profile__img-btn');
     this._imgElement = this._sectionElement.querySelector('.profile__img');
     this._nameElement = this._sectionElement.querySelector('.profile__title');
     this._aboutElement = this._sectionElement.querySelector('.profile__descr');
+
+    this._handleImgClick = handleImgClick;
+  }
+
+  _setEventListener() {
+    this._imgButtonElement.addEventListener('click', this._handleImgClick);
   }
 
   getUserInfo() {
@@ -27,12 +35,18 @@ export class UserInfo {
     this._aboutElement.textContent = about;
   }
 
+  setUserImg({ avatar }) {
+    this._imgElement.src = avatar;
+  }
+
   createUser() {
     this._imgElement.src = this._avatar;
     this._imgElement.alt = `аватар пользователя: ${this._name}`;
 
     this._nameElement.textContent = this._name;
     this._aboutElement.textContent = this._about;
+
+    this._setEventListener();
 
     return this._sectionElement;
   }

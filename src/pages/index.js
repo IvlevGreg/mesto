@@ -9,12 +9,18 @@ import { UserInfo } from '../scripts/components/UserInfo.js';
 import { Api } from '../scripts/components/Api';
 
 const buttonEdit = document.querySelector('.profile__edit-button');
-const formEdit = document.querySelector('.popup-form_edit');
 
 const buttonCreate = document.querySelector('.profile__add-button');
-const formCreate = document.querySelector('.popup-form_create');
 
 const templatePlaceItem = 'template-place-item';
+
+const formValidatorSelectorsProps = {
+  inputSelector: '.popup-form__input',
+  submitButtonSelector: '.popup-form__submit-button',
+  inactiveButtonClass: 'popup-form__submit-button_disabled',
+  inputErrorClass: 'popup-form__input_error_active',
+  errorClass: 'popup-form__input-error_active',
+};
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-63',
@@ -72,102 +78,130 @@ const cardList = new Section({ renderer: rendererCard }, '.place__list');
 //popup edit
 
 const formEditValidator = new FormValidator(
-  {
-    inputSelector: '.popup-form__input',
-    submitButtonSelector: '.popup-form__submit-button',
-    inactiveButtonClass: 'popup-form__submit-button_disabled',
-    inputErrorClass: 'popup-form__input_error_active',
-    errorClass: 'popup-form__input-error_active',
-  },
-  formEdit
+  formValidatorSelectorsProps,
+  '.popup-form_edit'
 );
 formEditValidator.enableValidation();
 
 const profileContainer = document.querySelector('.profile');
 
-api.getUserdata().then((data) => {
-  const userInfo = new UserInfo(data, 'template-profile');
-  profileContainer.prepend(userInfo.createUser());
+api
+  .getUserdata()
+  .then((data) => {
+    function handleImgClick() {
+      popupFormImgEdit.open();
+    }
 
-  buttonEdit.addEventListener('click', () => {
-    popupFormEdit.setInputValues({ ...userInfo.getUserInfo() });
-    popupFormEdit.open();
-  });
+    const popupFormImgEdit = new PopupWithForm(
+      '.popup_profile-img-edit',
+      '.popup__close-button',
+      formEditImgCallback
+    );
+    popupFormImgEdit.setEventListeners();
 
-  const popupFormEdit = new PopupWithForm(
-    '.popup_edit',
-    '.popup__close-button',
-    formEditCallback
-  );
+    function formEditImgCallback() {
+      popupFormImgEdit.setStatus('isLoading');
+      api
+        .updateUserImg({ ...popupFormImgEdit.getInputValues() })
+        .then((res) => {
+          userInfo.setUserImg(res);
+          popupFormImgEdit.close();
+          popupFormImgEdit.setStatus('success');
+        })
+        .catch((error) => {
+          popupFormImgEdit.setStatus('error');
+          throw new Error(error);
+        });
+    }
 
-  function formEditCallback() {
-    popupFormEdit.setStatus('isLoading');
+    const formEditImgValidator = new FormValidator(
+      formValidatorSelectorsProps,
+      '.popup_profile-img-edit'
+    );
+    formEditImgValidator.enableValidation();
+
+    const userInfo = new UserInfo(data, 'template-profile', { handleImgClick });
+    profileContainer.prepend(userInfo.createUser());
+
+    buttonEdit.addEventListener('click', () => {
+      popupFormEdit.setInputValues({ ...userInfo.getUserInfo() });
+      popupFormEdit.open();
+    });
+
+    const popupFormEdit = new PopupWithForm(
+      '.popup_edit',
+      '.popup__close-button',
+      formEditCallback
+    );
+    popupFormEdit.setEventListeners();
+
+    function formEditCallback() {
+      popupFormEdit.setStatus('isLoading');
+      api
+        .updateUserData({ ...popupFormEdit.getInputValues() })
+        .then((res) => {
+          userInfo.setUserInfo(res);
+          popupFormEdit.close();
+          popupFormEdit.setStatus('success');
+        })
+        .catch((error) => {
+          popupFormEdit.setStatus('error');
+          throw new Error(error);
+        });
+    }
+
+    // create cards
+
     api
-      .updateUserData({ ...popupFormEdit.getInputValues() })
+      .getInitialCards()
       .then((res) => {
-        userInfo.setUserInfo(res);
-        popupFormEdit.close();
-        popupFormEdit.setStatus('success');
+        cardList.renderItems(res, data._id);
       })
       .catch((error) => {
-        popupFormCreate.setStatus('error');
-        throw new Error(error);
+        console.log(error);
       });
-  }
 
-  popupFormEdit.setEventListeners();
+    function formCreateCallback() {
+      formCreateValidator.disableButton();
+      popupFormCreate.setStatus('isLoading');
+      const { ...card } = popupFormCreate.getInputValues();
 
-  // create cards
+      api
+        .postNewCard(card)
+        .then((card) => {
+          cardList.addItem(createCard(card, data._id), false);
+          popupFormCreate.close();
+          popupFormCreate.setStatus('success');
+        })
+        .catch((error) => {
+          popupFormCreate.setStatus('error');
+          throw new Error(error);
+        })
+        .finally(() => {
+          formCreateValidator.enableButton();
+        });
+    }
 
-  api.getInitialCards().then((res) => {
-    cardList.renderItems(res, data._id);
+    const popupFormCreate = new PopupWithForm(
+      '.popup_create',
+      '.popup__close-button',
+      formCreateCallback
+    );
+    popupFormCreate.setEventListeners();
+
+    buttonCreate.addEventListener('click', () => {
+      formCreateValidator.disableButton();
+      popupFormCreate.open();
+    });
+  })
+  .catch((error) => {
+    console.log(error);
   });
-
-  function formCreateCallback() {
-    console.log(data._id);
-    formCreateValidator.disableButton();
-    popupFormCreate.setStatus('isLoading');
-    const { ...card } = popupFormCreate.getInputValues();
-
-    api
-      .postNewCard(card)
-      .then((card) => {
-        cardList.addItem(createCard(card, data._id), false);
-        popupFormCreate.close();
-        popupFormCreate.setStatus('success');
-      })
-      .catch((error) => {
-        popupFormCreate.setStatus('error');
-        throw new Error(error);
-      })
-      .finally(() => {
-        formCreateValidator.enableButton();
-      });
-  }
-
-  const popupFormCreate = new PopupWithForm(
-    '.popup_create',
-    '.popup__close-button',
-    formCreateCallback
-  );
-  popupFormCreate.setEventListeners();
-
-  buttonCreate.addEventListener('click', () => {
-    formCreateValidator.disableButton();
-    popupFormCreate.open();
-  });
-});
 
 // popup create
 
 const formCreateValidator = new FormValidator(
-  {
-    inputSelector: '.popup-form__input',
-    submitButtonSelector: '.popup-form__submit-button',
-    inactiveButtonClass: 'popup-form__submit-button_disabled',
-    inputErrorClass: 'popup-form__input_error_active',
-    errorClass: 'popup-form__input-error_active',
-  },
-  formCreate
+  formValidatorSelectorsProps,
+  '.popup-form_create'
 );
 formCreateValidator.enableValidation();

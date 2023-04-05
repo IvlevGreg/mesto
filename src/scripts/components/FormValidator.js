@@ -7,14 +7,14 @@ export class FormValidator {
       inputErrorClass,
       errorClass,
     },
-    form
+    formSelector
   ) {
     this._inputSelector = inputSelector;
     this._submitButtonSelector = submitButtonSelector;
     this._inactiveButtonClass = inactiveButtonClass;
     this._inputErrorClass = inputErrorClass;
     this._errorClass = errorClass;
-    this._form = form;
+    this._form = document.querySelector(formSelector);
     this._inputList = Array.from(
       this._form.querySelectorAll(this._inputSelector)
     );
