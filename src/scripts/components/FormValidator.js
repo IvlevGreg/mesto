@@ -7,14 +7,14 @@ export class FormValidator {
       inputErrorClass,
       errorClass,
     },
-    form
+    formSelector
   ) {
     this._inputSelector = inputSelector;
     this._submitButtonSelector = submitButtonSelector;
     this._inactiveButtonClass = inactiveButtonClass;
     this._inputErrorClass = inputErrorClass;
     this._errorClass = errorClass;
-    this._form = form;
+    this._form = document.querySelector(formSelector);
     this._inputList = Array.from(
       this._form.querySelectorAll(this._inputSelector)
     );
@@ -48,7 +48,7 @@ export class FormValidator {
   _toggleButtonState() {
     const isFormValid = this._inputList.every(({ validity }) => validity.valid);
     if (isFormValid) {
-      this._enableButton();
+      this.enableButton();
     } else {
       this.disableButton();
     }
@@ -66,7 +66,7 @@ export class FormValidator {
     this._buttonSubmit.disabled = true;
   }
 
-  _enableButton() {
+  enableButton() {
     this._buttonSubmit.classList.remove(this._inactiveButtonClass);
     this._buttonSubmit.disabled = false;
   }
