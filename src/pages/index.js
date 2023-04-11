@@ -129,6 +129,7 @@ api
     }
 
     function handleImgCallback() {
+      formEditImgValidator.disableButton();
       popupFormImgEdit.open();
     }
 
