@@ -38,11 +38,11 @@ popupWithImage.setEventListeners();
 const popupFormCardRemove = new PopupWithForm(
   '.popup_card-remove',
   '.popup__close-button',
-  formCardRemoveCallback
+  handleCardRemoveCallback
 );
 popupFormCardRemove.setEventListeners();
 
-function formCardRemoveCallback() {
+function handleCardRemoveCallback() {
   popupFormCardRemove.close();
 }
 
@@ -136,11 +136,11 @@ api
     const popupFormEdit = new PopupWithForm(
       '.popup_edit',
       '.popup__close-button',
-      formEditCallback
+      handleFormEdit
     );
     popupFormEdit.setEventListeners();
 
-    function formEditCallback() {
+    function handleFormEdit() {
       popupFormEdit.setStatus('isLoading');
       api
         .updateUserData({ ...popupFormEdit.getInputValues() })
@@ -166,7 +166,7 @@ api
         console.log(error);
       });
 
-    function formCreateCallback() {
+    function handleFormCreate() {
       formCreateValidator.disableButton();
       popupFormCreate.setStatus('isLoading');
       const { ...card } = popupFormCreate.getInputValues();
@@ -190,7 +190,7 @@ api
     const popupFormCreate = new PopupWithForm(
       '.popup_create',
       '.popup__close-button',
-      formCreateCallback
+      handleFormCreate
     );
     popupFormCreate.setEventListeners();
   })
