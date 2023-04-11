@@ -71,12 +71,16 @@ export class FormValidator {
     this._buttonSubmit.disabled = false;
   }
 
-  enableValidation() {
+  _setEventListener() {
     this._inputList.forEach((input) => {
       input.addEventListener('input', () => {
         this._toggleInputError(input, input.validationMessage);
         this._toggleButtonState();
       });
     });
+  }
+
+  enableValidation() {
+    this._setEventListener();
   }
 }
