@@ -83,6 +83,7 @@ export class Card {
     this._putLike(this._cardId)
       .then(({ likes }) => {
         this._setLikes(likes);
+        this._toggleButtonClassActive(true);
       })
       .catch(() => this._setLikesAmount('Упс...'));
   }
@@ -92,6 +93,7 @@ export class Card {
     this._deleteLike(this._cardId)
       .then(({ likes }) => {
         this._setLikes(likes);
+        this._toggleButtonClassActive(false);
       })
       .catch(() => this._setLikesAmount('Упс...'));
   }
@@ -107,7 +109,6 @@ export class Card {
   _setEventListener() {
     this._likeButtonElement.addEventListener('click', () => {
       this._isUserLike() ? this._removeLike() : this._addLike();
-      this._toggleButtonClassActive();
     });
 
     if (this._isUserAuthor()) {
