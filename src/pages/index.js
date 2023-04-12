@@ -7,6 +7,7 @@ import { PopupWithForm } from '../scripts/components/PopupWithForm.js';
 import { PopupWithImage } from '../scripts/components/PopupWithImage.js';
 import { UserInfo } from '../scripts/components/UserInfo.js';
 import { Api } from '../scripts/components/Api';
+import { PopupWIthConfirm } from '../scripts/components/PopupWIthConfirm';
 
 const buttonCreate = document.querySelector('.profile__add-button');
 const templatePlaceItem = 'template-place-item';
@@ -35,16 +36,18 @@ const popupWithImage = new PopupWithImage(
 );
 popupWithImage.setEventListeners();
 
-const popupFormCardRemove = new PopupWithForm(
+const popupFormCardRemove = new PopupWIthConfirm(
   '.popup_card-remove',
-  '.popup__close-button',
-  handleCardRemoveCallback
+  '.popup__close-button'
+  // handleCardRemoveCallback
 );
 popupFormCardRemove.setEventListeners();
 
-function handleCardRemoveCallback() {
-  popupFormCardRemove.close();
-}
+// function handleCardRemoveCallback() {
+//   popupFormCardRemove.close();
+//   removeCard();
+//   console.log('test');
+// }
 
 function createCard(card, userId) {
   const cardEl = new Card(
@@ -65,9 +68,23 @@ function rendererCard(card, id) {
   cardList.addItem(createCard(card, id));
 }
 
-function removeCard(callback) {
+function removeCard(card) {
   popupFormCardRemove.open.call(popupFormCardRemove);
-  popupFormCardRemove._popup.addEventListener('submit', callback);
+
+  popupFormCardRemove.setSubmitAction(() => {
+    popupFormCardRemove.setStatus('loading');
+    api
+      .removeCard(card._cardId)
+      .then(() => {
+        card.removeCard();
+        popupFormCardRemove.close();
+        popupFormCardRemove.setStatus('success');
+      })
+      .catch((error) => {
+        popupFormCardRemove.setStatus('error');
+        throw new Error(error);
+      });
+  });
 }
 
 const cardList = new Section({ renderer: rendererCard }, '.place__list');
