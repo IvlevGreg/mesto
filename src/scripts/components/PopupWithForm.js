@@ -58,9 +58,6 @@ export class PopupWithForm extends Popup {
       default:
         break;
     }
-    if (isLoading) {
-    } else {
-    }
   }
 
   setInputValues(obj) {
