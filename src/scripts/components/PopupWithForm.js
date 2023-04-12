@@ -45,9 +45,9 @@ export class PopupWithForm extends Popup {
     this._btnSubmitElement.textContent = text;
   }
 
-  setStatus(isLoading) {
-    switch (isLoading) {
-      case 'isLoading':
+  setStatus(status) {
+    switch (status) {
+      case 'loading':
         this._changeBtnSubmitText('Сохранение...');
         break;
       case 'success':

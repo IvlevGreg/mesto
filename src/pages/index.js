@@ -91,7 +91,7 @@ api
     popupFormImgEdit.setEventListeners();
 
     function formEditImgCallback() {
-      popupFormImgEdit.setStatus('isLoading');
+      popupFormImgEdit.setStatus('loading');
       api
         .updateUserImg({ ...popupFormImgEdit.getInputValues() })
         .then((res) => {
@@ -141,7 +141,7 @@ api
     popupFormEdit.setEventListeners();
 
     function handleFormEdit() {
-      popupFormEdit.setStatus('isLoading');
+      popupFormEdit.setStatus('loading');
       api
         .updateUserData({ ...popupFormEdit.getInputValues() })
         .then((res) => {
@@ -168,7 +168,7 @@ api
 
     function handleFormCreate() {
       formCreateValidator.disableButton();
-      popupFormCreate.setStatus('isLoading');
+      popupFormCreate.setStatus('loading');
       const { ...card } = popupFormCreate.getInputValues();
 
       api
