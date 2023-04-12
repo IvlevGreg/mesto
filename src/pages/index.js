@@ -72,8 +72,7 @@ function removeCard(card) {
   popupFormCardRemove.open.call(popupFormCardRemove);
 
   popupFormCardRemove.setSubmitAction(() => {
-    popupFormCardRemove.setStatus('loading');
-    api
+    return api
       .removeCard(card._cardId)
       .then(() => {
         card.removeCard();
@@ -108,16 +107,12 @@ api
     popupFormImgEdit.setEventListeners();
 
     function formEditImgCallback() {
-      popupFormImgEdit.setStatus('loading');
-      api
+      return api
         .updateUserImg({ ...popupFormImgEdit.getInputValues() })
         .then((res) => {
           userInfo.setUserImg(res);
-          popupFormImgEdit.close();
-          popupFormImgEdit.setStatus('success');
         })
         .catch((error) => {
-          popupFormImgEdit.setStatus('error');
           throw new Error(error);
         });
     }
@@ -158,16 +153,12 @@ api
     popupFormEdit.setEventListeners();
 
     function handleFormEdit() {
-      popupFormEdit.setStatus('loading');
-      api
+      return api
         .updateUserData({ ...popupFormEdit.getInputValues() })
         .then((res) => {
           userInfo.setUserInfo(res);
-          popupFormEdit.close();
-          popupFormEdit.setStatus('success');
         })
         .catch((error) => {
-          popupFormEdit.setStatus('error');
           throw new Error(error);
         });
     }
@@ -185,18 +176,14 @@ api
 
     function handleFormCreate() {
       formCreateValidator.disableButton();
-      popupFormCreate.setStatus('loading');
       const { ...card } = popupFormCreate.getInputValues();
 
-      api
+      return api
         .postNewCard(card)
         .then((card) => {
           cardList.addItem(createCard(card, data._id), false);
-          popupFormCreate.close();
-          popupFormCreate.setStatus('success');
         })
         .catch((error) => {
-          popupFormCreate.setStatus('error');
           throw new Error(error);
         })
         .finally(() => {
