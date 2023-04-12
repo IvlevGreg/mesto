@@ -7,6 +7,7 @@ import { PopupWithForm } from '../scripts/components/PopupWithForm.js';
 import { PopupWithImage } from '../scripts/components/PopupWithImage.js';
 import { UserInfo } from '../scripts/components/UserInfo.js';
 import { Api } from '../scripts/components/Api';
+import { PopupWIthConfirm } from '../scripts/components/PopupWIthConfirm';
 
 const buttonCreate = document.querySelector('.profile__add-button');
 const templatePlaceItem = 'template-place-item';
@@ -35,16 +36,18 @@ const popupWithImage = new PopupWithImage(
 );
 popupWithImage.setEventListeners();
 
-const popupFormCardRemove = new PopupWithForm(
+const popupFormCardRemove = new PopupWIthConfirm(
   '.popup_card-remove',
-  '.popup__close-button',
-  formCardRemoveCallback
+  '.popup__close-button'
+  // handleCardRemoveCallback
 );
 popupFormCardRemove.setEventListeners();
 
-function formCardRemoveCallback() {
-  popupFormCardRemove.close();
-}
+// function handleCardRemoveCallback() {
+//   popupFormCardRemove.close();
+//   removeCard();
+//   console.log('test');
+// }
 
 function createCard(card, userId) {
   const cardEl = new Card(
@@ -65,9 +68,22 @@ function rendererCard(card, id) {
   cardList.addItem(createCard(card, id));
 }
 
-function removeCard(callback) {
+function removeCard(card) {
   popupFormCardRemove.open.call(popupFormCardRemove);
-  popupFormCardRemove._popup.addEventListener('submit', callback);
+
+  popupFormCardRemove.setSubmitAction(() => {
+    return api
+      .removeCard(card._cardId)
+      .then(() => {
+        card.removeCard();
+        popupFormCardRemove.close();
+        popupFormCardRemove.setStatus('success');
+      })
+      .catch((error) => {
+        popupFormCardRemove.setStatus('error');
+        throw new Error(error);
+      });
+  });
 }
 
 const cardList = new Section({ renderer: rendererCard }, '.place__list');
@@ -91,16 +107,12 @@ api
     popupFormImgEdit.setEventListeners();
 
     function formEditImgCallback() {
-      popupFormImgEdit.setStatus('isLoading');
-      api
+      return api
         .updateUserImg({ ...popupFormImgEdit.getInputValues() })
         .then((res) => {
           userInfo.setUserImg(res);
-          popupFormImgEdit.close();
-          popupFormImgEdit.setStatus('success');
         })
         .catch((error) => {
-          popupFormImgEdit.setStatus('error');
           throw new Error(error);
         });
     }
@@ -129,27 +141,24 @@ api
     }
 
     function handleImgCallback() {
+      formEditImgValidator.disableButton();
       popupFormImgEdit.open();
     }
 
     const popupFormEdit = new PopupWithForm(
       '.popup_edit',
       '.popup__close-button',
-      formEditCallback
+      handleFormEdit
     );
     popupFormEdit.setEventListeners();
 
-    function formEditCallback() {
-      popupFormEdit.setStatus('isLoading');
-      api
+    function handleFormEdit() {
+      return api
         .updateUserData({ ...popupFormEdit.getInputValues() })
         .then((res) => {
           userInfo.setUserInfo(res);
-          popupFormEdit.close();
-          popupFormEdit.setStatus('success');
         })
         .catch((error) => {
-          popupFormEdit.setStatus('error');
           throw new Error(error);
         });
     }
@@ -165,20 +174,16 @@ api
         console.log(error);
       });
 
-    function formCreateCallback() {
+    function handleFormCreate() {
       formCreateValidator.disableButton();
-      popupFormCreate.setStatus('isLoading');
       const { ...card } = popupFormCreate.getInputValues();
 
-      api
+      return api
         .postNewCard(card)
         .then((card) => {
           cardList.addItem(createCard(card, data._id), false);
-          popupFormCreate.close();
-          popupFormCreate.setStatus('success');
         })
         .catch((error) => {
-          popupFormCreate.setStatus('error');
           throw new Error(error);
         })
         .finally(() => {
@@ -189,7 +194,7 @@ api
     const popupFormCreate = new PopupWithForm(
       '.popup_create',
       '.popup__close-button',
-      formCreateCallback
+      handleFormCreate
     );
     popupFormCreate.setEventListeners();
   })

@@ -1,9 +1,8 @@
 import { Popup } from './Popup.js';
 
-export class PopupWithForm extends Popup {
-  constructor(popupSelector, buttonCloseSelector, submitCallback) {
+export class PopupWIthConfirm extends Popup {
+  constructor(popupSelector, buttonCloseSelector) {
     super(popupSelector, buttonCloseSelector);
-    this._submitCallback = submitCallback;
     this._inputs = this._popup.querySelectorAll('input') || [];
     this._form = this._popup.querySelector('form');
 
@@ -11,16 +10,8 @@ export class PopupWithForm extends Popup {
     this._btnSubmitText = this._btnSubmitElement.textContent;
   }
 
-  _getFocusOnFirstInput() {
-    if (this._popup.querySelector('input')) {
-      this._popup.querySelector('input').focus();
-    }
-  }
-
-  open() {
-    super.open();
-
-    this._getFocusOnFirstInput();
+  setSubmitAction(action) {
+    this._handleSubmitEvent = action;
   }
 
   setEventListeners() {
@@ -29,7 +20,7 @@ export class PopupWithForm extends Popup {
     this._popup.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this.setStatus('loading');
-      this._submitCallback()
+      this._handleSubmitEvent()
         .then(() => {
           this.close();
           this.setStatus('success');
@@ -38,15 +29,6 @@ export class PopupWithForm extends Popup {
           this.setStatus('error');
         });
     });
-  }
-
-  getInputValues() {
-    const obj = {};
-    this._inputs.forEach((input) => {
-      obj[input.name] = input.value;
-    });
-
-    return obj;
   }
 
   _changeBtnSubmitText(text) {
@@ -66,21 +48,5 @@ export class PopupWithForm extends Popup {
       default:
         break;
     }
-  }
-
-  setInputValues(obj) {
-    this._inputs.forEach((input) => {
-      if (obj[input.name]) {
-        input.value = obj[input.name].trim();
-      }
-    });
-
-    return obj;
-  }
-
-  close() {
-    super.close();
-
-    this._form.reset();
   }
 }

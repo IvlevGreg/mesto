@@ -3,7 +3,7 @@ export class Card {
     data,
     selectorTemplate,
     { handleCardClick, handleRemovePopup },
-    { putLike, deleteLike, removeCard: removeCardApi },
+    { putLike, deleteLike },
     userId
   ) {
     // data
@@ -30,7 +30,6 @@ export class Card {
     //api
     this._putLike = putLike;
     this._deleteLike = deleteLike;
-    this._removeCardApi = removeCardApi;
 
     //template
     this._template = document.getElementById(selectorTemplate).content;
@@ -58,15 +57,9 @@ export class Card {
     this._likeButtonElement.classList.toggle('like-button_active', bollean);
   }
 
-  _removeCard() {
-    this._removeCardApi(this._cardId)
-      .then(() => {
-        this._liElement.remove();
-        this._liElementent = null;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  removeCard() {
+    this._liElement.remove();
+    this._liElementent = null;
   }
 
   _setLikesAmount(num) {
@@ -83,6 +76,7 @@ export class Card {
     this._putLike(this._cardId)
       .then(({ likes }) => {
         this._setLikes(likes);
+        this._toggleButtonClassActive(true);
       })
       .catch(() => this._setLikesAmount('Упс...'));
   }
@@ -92,6 +86,7 @@ export class Card {
     this._deleteLike(this._cardId)
       .then(({ likes }) => {
         this._setLikes(likes);
+        this._toggleButtonClassActive(false);
       })
       .catch(() => this._setLikesAmount('Упс...'));
   }
@@ -107,12 +102,11 @@ export class Card {
   _setEventListener() {
     this._likeButtonElement.addEventListener('click', () => {
       this._isUserLike() ? this._removeLike() : this._addLike();
-      this._toggleButtonClassActive();
     });
 
     if (this._isUserAuthor()) {
       this._removeButtonElement.addEventListener('click', () =>
-        this._handleRemovePopup(this._removeCard.bind(this))
+        this._handleRemovePopup(this)
       );
     }
 
